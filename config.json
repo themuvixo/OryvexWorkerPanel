@@ -1,0 +1,6 @@
+{
+  "_note": "The only runtime setting is host. Leave it empty to use the domain currently serving the panel. Set it only when previewing the static HTML file offline.",
+
+  "host": "",
+  "tunnelPath": "/?ed=2048"
+}

@@ -1,0 +1,1438 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-lang="en" data-theme="dark" data-accent="signal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<title>OryvexWorkerPanel · Control panel</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2311140f'/%3E%3Cg fill='%23c8f03c'%3E%3Crect x='6' y='18' width='3.5' height='8' rx='1'/%3E%3Crect x='11.5' y='14' width='3.5' height='12' rx='1'/%3E%3Crect x='17' y='10' width='3.5' height='16' rx='1'/%3E%3Crect x='22.5' y='6' width='3.5' height='20' rx='1'/%3E%3C/g%3E%3C/svg%3E">
+<style>{{STYLE}}</style>
+<script>(function(){try{var h=document.documentElement,d=JSON.parse(localStorage.getItem("oryvex.display")||"{}"),t=d.theme||localStorage.getItem("oryvex.theme")||"dark";if(t==="system")t=window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";h.setAttribute("data-theme",t==="light"?"light":"dark");try{localStorage.setItem("oryvex.theme",t==="light"?"light":"dark")}catch(e){}["accent","density","text","motion","font","corners"].forEach(function(k){if(d[k])h.setAttribute("data-"+k,d[k])});if(d.ticker===false)h.setAttribute("data-ticker","off")}catch(e){}})();</script>
+</head>
+<body>
+
+<!-- ─────────── BESPOKE MONOCHROME VECTOR ICON SPRITE (ZERO EMOJIS) ─────────── -->
+<svg xmlns="http://www.w3.org/2000/svg" hidden aria-hidden="true">
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></symbol>
+  <symbol id="i-telegram" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="m9.78 18.65.28-4.23 7.71-6.93c.34-.31-.07-.46-.53-.18l-9.52 6.05-4.12-1.29c-.89-.28-.9-.89.2-1.33l16.08-6.2c.73-.32 1.44.18 1.17 1.4l-2.74 12.72c-.19.91-.75 1.13-1.51.71l-4.24-3.14-2.05 1.97c-.23.23-.43.43-.73.45Z"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+  <symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/><path d="M12 12l6.3-6.3"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 19c-7 0-11-7-11-7a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 7 11 7a18.5 18.5 0 0 1-2.16 3.19"/><path d="M1 1l22 22"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14.5 14.5 0 0 1 0 18 14.5 14.5 0 0 1 0-18z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 19h18"/><path d="M4 15l4-5 4 3 5-7 3 3"/></symbol>
+  <symbol id="i-bars" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20v-11"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="1"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM18 18h3v3h-3zM18 14h3M14 18v3"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></symbol>
+  <symbol id="i-power" viewBox="0 0 24 24"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><path d="M12 2v10"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3L21 2"/><path d="M17 6l3 3M14 9l2 2"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="7" rx="1"/><rect x="2" y="14" width="20" height="7" rx="1"/><path d="M6 6.5h.01M6 17.5h.01"/></symbol>
+  <symbol id="i-trace-solid" viewBox="0 0 24 24"><path d="M2 14h3.5l2.5-6 4 10 3-7 2.5 3H22"/></symbol>
+  <symbol id="i-trace-dash" viewBox="0 0 24 24"><path d="M2 12h3M8 12h3M14 12h3M20 12h2"/><circle cx="6.5" cy="12" r="1"/><circle cx="18.5" cy="12" r="1"/></symbol>
+  <symbol id="i-bar-hatch" viewBox="0 0 24 24"><rect x="3" y="10" width="4.5" height="10"/><rect x="9.75" y="4" width="4.5" height="16"/><rect x="16.5" y="13" width="4.5" height="7"/><path d="M9.8 9.5l4.4-4.4M9.8 14.5l4.4-4.4M9.8 19.5l4.4-4.4"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 17a8 8 0 1 1 16 0"/><path d="M12 13l3.5-3.5"/><circle cx="12" cy="13" r="1.4"/></symbol>
+  <symbol id="i-cloud-up" viewBox="0 0 24 24"><path d="M12 16V5"/><path d="M8 9l4-4 4 4"/><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.8-1.7 1.8-1.7H16a5 5 0 0 0 5-5c0-4-4-7.2-9-7.2z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7" r="1"/><circle cx="17.5" cy="11" r="1"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 7.8h.01"/></symbol>
+</svg>
+
+<!-- ─────────── OFFICIAL FREE & NON-COMMERCIAL POPUP NOTICE ─────────── -->
+<div class="modal-backdrop" id="free-notice-modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="fn-title">
+    <p class="kicker">
+      <svg class="ic"><use href="#i-shield"/></svg>
+      <span class="en">Official notice · OryvexWorkerPanel v{{VERSION}}</span>
+    </p>
+    <h2 class="head" id="fn-title" style="font-size:21px;margin-top:4px">
+      <span class="en">100% free and open-source. Strictly not for sale.</span>
+    </h2>
+    <p class="labor" style="margin-top:10px">
+      <span class="en"><strong>OryvexWorkerPanel</strong> is a 100% free and open-source project. Selling access, panels, or subscriptions built with this software is strictly prohibited.</span>
+    </p>
+    <div class="actions" style="justify-content:flex-end;margin-top:16px">
+      <button class="btn primary" id="btn-free-close" type="button">
+        <svg class="ic"><use href="#i-check"/></svg>
+        <span class="en">I understand, continue</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────── COMPACT CLOUDFLARE DAILY REQUEST QUOTA & TOKEN MODAL ─────────── -->
+<div class="modal-backdrop" id="cf-modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="cf-modal-title" style="max-width:520px;position:relative">
+    <div class="stat-strip">
+      <p class="kicker" style="margin:0">
+        <svg class="ic"><use href="#i-gauge"/></svg>
+        <span class="en">Cloudflare daily request quota</span>
+      </p>
+      <button class="mini" id="btn-cf-close" type="button" style="width:30px;height:30px" title="Close">
+        <svg class="ic ic-sm"><use href="#i-x"/></svg>
+      </button>
+    </div>
+
+    <h3 class="head" id="cf-modal-title" style="font-size:18px;margin-top:6px">
+      <span class="en">Daily account quota &amp; API token</span>
+    </h3>
+
+    <div class="cf-quota-box" id="cf-quota-card">
+      <div class="stat-strip" style="font-size:12px">
+        <span class="mono" id="cf-modal-nums">0 / 100,000 (0%)</span>
+        <button class="blur-btn" id="btn-cf-refresh" type="button">
+          <svg class="ic ic-sm"><use href="#i-refresh"/></svg>
+          <span class="en">Refresh</span>
+        </button>
+      </div>
+      <div class="meter" style="margin-top:7px"><i id="cf-modal-bar" style="width:0%"></i></div>
+      <div class="stat-strip" style="margin-top:6px;font-size:11px;color:var(--ink-faint)">
+        <span id="cf-modal-acc"><span class="en">Token not configured</span></span>
+        <span class="mono" id="cf-modal-reset">UTC 00:00</span>
+      </div>
+    </div>
+
+    <div style="margin-top:12px">
+      <div class="stat-strip" style="margin-bottom:5px">
+        <label class="fld-label" for="cf-inp-token" style="margin:0">
+          <span class="en">Cloudflare API token</span>
+        </label>
+        <div class="cf-help-links">
+          <a class="inline-link" href="https://dash.cloudflare.com/profile/api-tokens?permissionGroupKeys=%5B%7B%22key%22%3A%22account_analytics%22%2C%22type%22%3A%22read%22%7D%2C%7B%22key%22%3A%22account_settings%22%2C%22type%22%3A%22read%22%7D%5D&amp;accountId=*&amp;zoneId=all&amp;name=Oryvex%20Analytics" target="_blank" rel="noopener noreferrer" id="cf-template-quick">
+            <span class="en">Pre-filled read-only token</span>
+            <svg class="ic ic-sm"><use href="#i-external"/></svg>
+          </a>
+          <span>·</span>
+          <button class="inline-link-btn" id="btn-cf-guide-pop" type="button">
+            <svg class="ic ic-sm"><use href="#i-info"/></svg>
+            <span class="en">Required permissions</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mini Compact Popup Guide for Token Permissions -->
+      <div class="perm-popover" id="cf-perm-popover" hidden>
+        <div class="stat-strip" style="margin-bottom:6px">
+          <strong style="font-size:12px">
+            <span class="en">Pre-filled Cloudflare token templates</span>
+          </strong>
+          <button class="inline-link-btn" id="btn-cf-guide-close" type="button">
+            <svg class="ic ic-sm"><use href="#i-x"/></svg>
+          </button>
+        </div>
+        <p class="hint" style="margin:0 0 8px"><span class="en">Open an official pre-filled Cloudflare template. Select your account, review permissions and confirm in your own dashboard; copy the displayed token here yourself. No token is silently sent back to this panel.</span></p>
+        <div class="token-templates">
+          <a class="btn ghost sm-btn" id="cf-template-read" href="https://dash.cloudflare.com/profile/api-tokens?permissionGroupKeys=%5B%7B%22key%22%3A%22account_analytics%22%2C%22type%22%3A%22read%22%7D%2C%7B%22key%22%3A%22account_settings%22%2C%22type%22%3A%22read%22%7D%5D&amp;accountId=*&amp;zoneId=all&amp;name=Oryvex%20Analytics" target="_blank" rel="noopener noreferrer"><svg class="ic ic-sm"><use href="#i-key"/></svg><span class="en">Analytics only (recommended)</span><svg class="ic ic-sm"><use href="#i-external"/></svg></a>
+          <a class="btn ghost sm-btn" id="cf-template-update" href="https://dash.cloudflare.com/profile/api-tokens?permissionGroupKeys=%5B%7B%22key%22%3A%22account_analytics%22%2C%22type%22%3A%22read%22%7D%2C%7B%22key%22%3A%22account_settings%22%2C%22type%22%3A%22read%22%7D%2C%7B%22key%22%3A%22workers_scripts%22%2C%22type%22%3A%22edit%22%7D%5D&amp;accountId=*&amp;zoneId=all&amp;name=Oryvex%20Analytics%20and%20Self-Update" target="_blank" rel="noopener noreferrer"><svg class="ic ic-sm"><use href="#i-cloud-up"/></svg><span class="en">+ Worker self-update (optional)</span><svg class="ic ic-sm"><use href="#i-external"/></svg></a>
+        </div>
+        <p class="hint" style="margin:9px 0 6px"><span class="en">Permissions preselected by the template:</span></p>
+        <ul class="perm-list">
+          <li><code>Account · Account Analytics · Read</code> — <span class="en">Required for daily request count</span></li>
+          <li><code>Account · Account Settings · Read</code> — <span class="en">Auto-detect Account ID</span></li>
+          <li><code>Account · Workers Scripts · Edit</code> — <span class="en">Optional (for in-panel GitHub self-update)</span></li>
+        </ul>
+        <div style="margin-top:6px;font-size:11px">
+          <a class="inline-link" href="https://developers.cloudflare.com/fundamentals/api/get-started/create-token/" target="_blank" rel="noopener">
+            <span class="en">Cloudflare API token permissions (docs)</span>
+            <svg class="ic ic-sm"><use href="#i-external"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <input id="cf-inp-token" type="password" dir="ltr" autocomplete="off" placeholder="Paste Cloudflare API Token...">
+    </div>
+
+    <div class="field-grid" style="margin-top:10px">
+      <div>
+        <label class="fld-label" for="cf-inp-script"><span class="en">Worker name (auto)</span></label>
+        <input id="cf-inp-script" type="text" dir="ltr" autocomplete="off" placeholder="auto-detected">
+      </div>
+      <div>
+        <label class="fld-label" for="cf-inp-limit"><span class="en">Daily request limit</span></label>
+        <input id="cf-inp-limit" type="number" min="1000" step="1000" value="100000">
+      </div>
+    </div>
+
+    <div id="cf-verify-msg" hidden></div>
+
+    <div class="actions" style="justify-content:space-between;margin-top:14px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn sm-btn" id="btn-cf-verify" type="button">
+          <svg class="ic ic-sm"><use href="#i-radar"/></svg>
+          <span class="en">Verify token</span>
+        </button>
+        <button class="btn primary sm-btn" id="btn-cf-save" type="button">
+          <svg class="ic ic-sm"><use href="#i-check"/></svg>
+          <span class="en">Save &amp; enable</span>
+        </button>
+      </div>
+      <button class="btn ghost sm-btn" id="btn-cf-clear" type="button" hidden>
+        <svg class="ic ic-sm"><use href="#i-trash"/></svg>
+        <span class="en">Remove</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────── HARDCODED GITHUB REPO UPDATE & SELF-UPDATER MODAL ─────────── -->
+<div class="modal-backdrop" id="gh-modal" hidden>
+  <div class="modal-box upd-box" role="dialog" aria-modal="true" aria-labelledby="gh-modal-title">
+    <div class="stat-strip">
+      <p class="kicker" style="margin:0">
+        <svg class="ic"><use href="#i-cloud-up"/></svg>
+        <span class="en">Updates</span>
+      </p>
+      <button class="mini" id="btn-gh-close" type="button" style="width:30px;height:30px" title="Close">
+        <svg class="ic ic-sm"><use href="#i-x"/></svg>
+      </button>
+    </div>
+
+    <h3 class="head sr-only" id="gh-modal-title"><span class="en">Check for updates</span></h3>
+
+    <div class="upd-hero" id="gh-hero" data-state="idle">
+      <div class="upd-ver">
+        <span class="upd-cap">Installed</span>
+        <b class="mono" id="gh-cur-ver">V{{VERSION}}</b>
+      </div>
+      <svg class="upd-arrow" viewBox="0 0 48 12" aria-hidden="true"><path d="M0 6h44M38 1l6 5-6 5"/></svg>
+      <div class="upd-ver">
+        <span class="upd-cap">Latest release</span>
+        <b class="mono" id="gh-rem-ver">—</b>
+      </div>
+      <span class="badge" id="gh-status-badge"><span class="en">Ready</span></span>
+    </div>
+
+    <div class="upd-meta">
+      <a class="inline-link mono" href="{{REPO_URL}}" target="_blank" rel="noopener">
+        github.com/{{REPO_SLUG}}
+        <svg class="ic ic-sm"><use href="#i-external"/></svg>
+      </a>
+      <span class="mono sm" id="gh-published"></span>
+      <span class="mono sm" id="gh-checked"></span>
+    </div>
+
+    <pre class="gh-notes" id="gh-notes-box" hidden></pre>
+
+    <div style="margin-top:14px">
+      <div class="stat-strip" style="margin-bottom:4px">
+        <label class="fld-label" for="gh-inp-script" style="margin:0">
+          <span class="en">Worker to update (KV, secrets &amp; users are kept)</span>
+        </label>
+        <button class="inline-link-btn" id="btn-gh-open-cf" type="button">
+          <svg class="ic ic-sm"><use href="#i-key"/></svg>
+          <span id="gh-token-hint"><span class="en">Configure CF token</span></span>
+        </button>
+      </div>
+      <input id="gh-inp-script" type="text" dir="ltr" autocomplete="off" placeholder="oryvex-worker-panel">
+    </div>
+
+    <div id="gh-msg" hidden></div>
+
+    <div class="actions" style="justify-content:space-between;margin-top:14px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn sm-btn" id="btn-gh-check" type="button">
+          <svg class="ic ic-sm" id="gh-check-ic"><use href="#i-refresh"/></svg>
+          <span class="en">Check now</span>
+        </button>
+        <button class="btn primary sm-btn" id="btn-gh-apply" type="button" disabled>
+          <svg class="ic ic-sm"><use href="#i-cloud-up"/></svg>
+          <span class="en" id="gh-apply-label">Install update</span>
+        </button>
+      </div>
+      <a class="btn ghost sm-btn" id="gh-dl-link" href="{{REPO_URL}}/releases" target="_blank" rel="noopener">
+        <svg class="ic ic-sm"><use href="#i-external"/></svg>
+        <span class="en">Release page</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ───────────────────────────── masthead ───────────────────────────── -->
+  <header class="masthead">
+    <div class="topline">
+      <span class="brand" aria-hidden="true"><span class="brand-mark"><i></i><i></i><i></i><i></i><i></i></span><b>ORYVEX</b></span>
+      <span class="tick">v{{VERSION}}</span>
+      <span class="tick" id="top-edge">COLO · —</span>
+      <span class="bar"></span>
+      <button class="sw" id="btn-free-info" type="button" title="Free and not for sale">
+        <svg class="ic ic-sm"><use href="#i-shield"/></svg>
+        <span class="en">Free · not for sale</span>
+      </button>
+      <button class="sw" id="btn-display" type="button" title="Display options" aria-haspopup="dialog">
+        <svg class="ic ic-sm"><use href="#i-palette"/></svg>
+        <span class="en">Display</span>
+      </button>
+      <div class="theme-grp" role="group" aria-label="Theme">
+        <button class="sw t-pick" data-th="light" type="button" title="Light theme" aria-label="Light theme"><svg class="ic ic-sm"><use href="#i-sun"/></svg></button>
+        <button class="sw t-pick" data-th="dark" type="button" title="Dark theme" aria-label="Dark theme"><svg class="ic ic-sm"><use href="#i-moon"/></svg></button>
+      </div>
+    </div>
+
+    <div class="hero">
+      <h1 class="mast-title" id="mast-title">Oryvex<span>Worker Panel</span></h1>
+      <div class="subline">
+        <span class="en">VLESS, Trojan and a Telegram proxy from one Cloudflare Worker. No server to rent.</span>
+        <span class="mono sm" id="mode-pill">Free &amp; open · v{{VERSION}}</span>
+      </div>
+    </div>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>VLESS + Trojan over WS</span><span>Telegram Web Proxy</span><span>TLS fragment profiles</span><span>Private DoH</span><span>Multi-user KV</span><span>Clean IP scanner</span><span>Browser ISP advisor</span><span>Free · not for sale</span>
+        <span>VLESS + Trojan over WS</span><span>Telegram Web Proxy</span><span>TLS fragment profiles</span><span>Private DoH</span><span>Multi-user KV</span><span>Clean IP scanner</span><span>Browser ISP advisor</span><span>Free · not for sale</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="free-ribbon">
+    <svg class="ic"><use href="#i-shield"/></svg>
+    <span class="en"><strong>Free and open-source.</strong> OryvexWorkerPanel v{{VERSION}} is not for sale, and neither are the links it creates.</span>
+  </div>
+
+  <!-- ───────── VISITOR CONNECTION IDENTITY & IP BLUR STRIP ───────── -->
+  <section class="conn-strip" id="visitor-strip" aria-label="Visitor Connection Identity">
+    <div class="conn-cell">
+      <span class="conn-lbl">
+        <svg class="ic ic-sm"><use href="#i-globe"/></svg>
+        <span class="en">Your IP address</span>
+      </span>
+      <div class="conn-val-row">
+        <span class="conn-val mono blur-val" id="visitor-ip" dir="ltr">—</span>
+        <button class="blur-btn" id="btn-ip-blur" type="button" title="Hide or show IP">
+          <svg class="ic ic-sm" id="ip-blur-icon"><use href="#i-eye-off"/></svg>
+          <span id="ip-blur-lbl">BLUR</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="conn-cell">
+      <span class="conn-lbl">
+        <svg class="ic ic-sm"><use href="#i-compass"/></svg>
+        <span class="en">Country &amp; region</span>
+      </span>
+      <div class="conn-val-row">
+        <span class="conn-val" id="visitor-country">—</span>
+        <span class="badge mono" id="visitor-iso">—</span>
+      </div>
+    </div>
+
+    <div class="conn-cell">
+      <span class="conn-lbl">
+        <svg class="ic ic-sm"><use href="#i-server"/></svg>
+        <span class="en">ISP / operator</span>
+      </span>
+      <div class="conn-val-row">
+        <span class="conn-val" id="visitor-isp">—</span>
+        <span class="mono sm" id="visitor-asn" style="opacity:.7"></span>
+      </div>
+    </div>
+
+    <div class="conn-cell">
+      <span class="conn-lbl">
+        <svg class="ic ic-sm"><use href="#i-radar"/></svg>
+        <span class="en">Edge PoP &amp; advisor</span>
+      </span>
+      <div class="conn-val-row" style="justify-content:space-between;width:100%">
+        <span class="conn-val mono" id="visitor-colo">COLO · —</span>
+        <button class="blur-btn" id="btn-jump-advisor" type="button">
+          <svg class="ic ic-sm"><use href="#i-radar"/></svg>
+          <span class="en">ISP test</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guest slot when Smart Advisor is opened before login -->
+  <div id="guest-advisor-slot" hidden style="margin-bottom:14px"></div>
+
+  <!-- ═════════════════════ VIEW 1: FIRST-RUN KV SETUP ════════════════════ -->
+  <section id="v-setup" hidden>
+    <div class="cols">
+      <div class="card">
+        <p class="kicker"><svg class="ic"><use href="#i-key"/></svg><span class="en">First-run setup</span></p>
+        <h2 class="head">
+          <span class="en">Set up your panel</span>
+        </h2>
+        <p class="labor">
+          <span class="en">Cloudflare <code>KV</code> storage is connected. Choose an admin password to create your first VLESS + Trojan subscriber, fragment profile and private DoH endpoint.</span>
+        </p>
+
+        <form id="f-setup" class="card-fill">
+          <div class="stack" style="margin-top:6px;gap:10px">
+            <div>
+              <label class="fld-label" for="setup-pass"><span class="en">Admin password (min 6 chars)</span></label>
+              <input id="setup-pass" type="password" autocomplete="new-password" required minlength="6" placeholder="••••••••">
+            </div>
+            <div>
+              <label class="fld-label" for="setup-name"><span class="en">First subscriber name</span></label>
+              <input id="setup-name" type="text" value="Primary admin">
+            </div>
+            <div>
+              <label class="fld-label" for="setup-uuid"><span class="en">Custom UUID (optional, leave blank to generate)</span></label>
+              <div class="fld">
+                <input id="setup-uuid" dir="ltr" type="text" placeholder="auto-generate">
+                <button class="mini" id="setup-gen-uuid" type="button" title="Mint UUID"><svg class="ic"><use href="#i-refresh"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <div class="actions mt-auto">
+            <button class="btn primary" type="submit">
+              <svg class="ic"><use href="#i-check"/></svg>
+              <span class="en">Create panel &amp; sign in</span>
+            </button>
+          </div>
+          <p class="err" id="setup-err" hidden></p>
+        </form>
+      </div>
+
+      <div class="card card-subtle">
+        <p class="kicker"><svg class="ic"><use href="#i-sliders"/></svg><span class="en">What this Worker runs</span></p>
+        <table class="specs" style="flex:1">
+          <tbody>
+            <tr><th><span class="en">Protocols</span></th><td class="mono">VLESS + Trojan WS</td></tr>
+            <tr><th><span class="en">Telegram</span></th><td class="mono">tg://webproxy (MTProto)</td></tr>
+            <tr><th><span class="en">Multi-user</span></th><td class="mono">GB Quota · Expiry · First-Use</td></tr>
+            <tr><th><span class="en">Anti-DPI</span></th><td class="mono">Fragment (1-1 / tlshello)</td></tr>
+            <tr><th><span class="en">ISP advisor</span></th><td class="mono">Live Probe + Auto-Config</td></tr>
+            <tr><th><span class="en">Sub cores</span></th><td class="mono">Xray · Sing-box · Mihomo</td></tr>
+            <tr><th><span class="en">Outbound</span></th><td class="mono">ProxyIP · NAT64 · Chain</td></tr>
+            <tr><th><span class="en">Private DoH</span></th><td class="mono">/dns-query/&lt;token&gt;</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ VIEW 2: LOGIN GATE ══════════════════════════ -->
+  <section id="v-login" hidden>
+    <div class="cols">
+      <div class="card">
+        <p class="kicker"><svg class="ic"><use href="#i-lock"/></svg><span class="en">Admin sign-in</span></p>
+        <h2 class="head" style="font-size:26px">
+          <span class="en">Welcome back</span>
+        </h2>
+        <p class="labor">
+          <span class="en">Enter the administrator password to manage subscribers, Clean IPs, Fragment, and routing rules.</span>
+        </p>
+        <form id="f-login" class="card-fill">
+          <div>
+            <label class="fld-label" for="login-pass"><span class="en">Admin password</span></label>
+            <input id="login-pass" type="password" autocomplete="current-password" required placeholder="••••••••">
+          </div>
+          <div class="actions mt-auto">
+            <button class="btn primary" type="submit">
+              <svg class="ic"><use href="#i-key"/></svg>
+              <span class="en">Sign in</span>
+            </button>
+          </div>
+          <p class="err" id="login-err" hidden></p>
+        </form>
+      </div>
+
+      <div class="card card-subtle">
+        <p class="kicker"><svg class="ic"><use href="#i-qr"/></svg><span class="en">For subscribers</span></p>
+        <p class="labor">
+          <span class="en">Have a subscription token? Open your personal page for QR codes, remaining traffic and one-tap client links:</span>
+        </p>
+        <div class="mt-auto">
+          <label class="fld-label" for="sub-jump-inp"><span class="en">Subscription token or UUID</span></label>
+          <div class="fld">
+            <input id="sub-jump-inp" dir="ltr" type="text" placeholder="e.g. k8m2x9p4q7w3n5r2">
+            <button class="btn ghost sm-btn" id="sub-jump-btn" type="button">
+              <span class="en">Open</span>
+              <svg class="ic ic-sm"><use href="#i-external"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <figure class="figure">
+      {{SKYLINE}}
+      <figcaption>
+        <span class="en">One Worker, one canvas: everything runs at the Cloudflare edge.</span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ═══════════════ VIEW 3: STATELESS / KV NOT BOUND GUIDE ══════════════ -->
+  <section id="v-stateless" hidden>
+    <aside class="notice warn-box">
+      <p class="notice-title">
+        <svg class="ic"><use href="#i-alert"/></svg>
+        <span class="en">Storage not connected yet · 60-second KV setup</span>
+      </p>
+      
+      <ol class="en">
+        <li>In Cloudflare Dashboard, open <strong>Storage &amp; Databases → KV → Create</strong> and name it <code>oryvex-kv</code>.</li>
+        <li>Open <strong>Workers &amp; Pages → Create → Start with Hello World! → Deploy</strong> (do <em>not</em> use Workers "Upload assets", which creates a static-only Worker).</li>
+        <li>Click <strong>Edit code</strong>, paste the entire contents of <code>worker-single-file.js</code>, and click <strong>Deploy</strong>.</li>
+        <li>Go to <strong>Settings → Bindings → Add binding → KV namespace</strong>, set Variable name to <code>KV</code>, select <code>oryvex-kv</code>, and save. Refresh this page!</li>
+      </ol>
+    </aside>
+
+    <div class="cols">
+      <div class="card">
+        <p class="kicker"><svg class="ic"><use href="#i-qr"/></svg><span class="en">Stateless single-user mode</span></p>
+        <p class="labor">
+          <span class="en">Running stateless with a <code>uuid</code> secret instead of KV? Paste that UUID below to print your VLESS URI and QR code:</span>
+        </p>
+        <div class="fld">
+          <input id="sl-uuid" dir="ltr" type="text" placeholder="00000000-0000-4000-8000-000000000000">
+          <button class="mini" id="sl-mint" type="button" title="Mint UUID"><svg class="ic"><use href="#i-refresh"/></svg></button>
+        </div>
+        <div id="sl-box" style="margin-top:14px" hidden>
+          <div class="qr-center"><div class="qrbox"><div class="qr" id="sl-qr"></div></div></div>
+          <div class="actions" style="justify-content:center">
+            <button class="btn primary sm-btn" id="sl-copy" type="button"><svg class="ic ic-sm"><use href="#i-copy"/></svg><span class="en">Copy VLESS URI</span></button>
+            <a class="btn ghost sm-btn" id="sl-sub" href="#" target="_blank"><span class="en">Subscription</span><svg class="ic ic-sm"><use href="#i-external"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-subtle">
+        <p class="kicker"><svg class="ic"><use href="#i-server"/></svg><span class="en">Runtime diagnostics</span></p>
+        <table class="specs" style="flex:1">
+          <tbody>
+            <tr><th><span class="en">Runtime mode</span></th><td class="mono" id="diag-mode">STATELESS</td></tr>
+            <tr><th><span class="en">KV binding</span></th><td class="mono" id="diag-kv">NOT BOUND</td></tr>
+            <tr><th><span class="en">ENV UUID</span></th><td class="mono" id="diag-uuid">—</td></tr>
+            <tr><th><span class="en">Edge COLO</span></th><td class="mono" id="diag-edge">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════════════ VIEW 4: FULL ADMIN PANEL ══════════════════════ -->
+  <section id="v-admin" hidden>
+<!-- Status Ledger Bar -->
+    <div class="ledger-bar">
+      <div class="ledger-items">
+        <span><span class="en">Colo:</span> <b id="st-edge">—</b></span>
+        <span>·</span>
+        <span>KV: <b id="st-kv">OK</b></span>
+        <span>·</span>
+        <span>USERS: <b id="st-users">0</b></span>
+        <span>·</span>
+        <span>TRAFFIC: <b id="st-traffic">0 B</b></span>
+        <span id="demo-badge" class="badge bad" hidden>DEMO PREVIEW</span>
+      </div>
+      <div class="ledger-actions">
+        <!-- Compact Cloudflare Daily Request Limit Progress Pill -->
+        <button class="quota-pill" id="btn-cf-quota" type="button" title="Cloudflare Daily Request Quota & Token">
+          <svg class="ic ic-sm"><use href="#i-gauge"/></svg>
+          <span class="quota-lbl"><span class="en">CF daily</span></span>
+          <span class="mini-meter" aria-hidden="true"><i id="cf-mini-bar" style="width:0%"></i></span>
+          <b class="mono" id="cf-mini-txt">TOKEN</b>
+        </button>
+
+        <!-- Compact Hardcoded GitHub Updater Pill -->
+        <button class="quota-pill" id="btn-gh-updater" type="button" title="github.com/{{REPO_SLUG}}">
+          <svg class="ic ic-sm"><use href="#i-cloud-up"/></svg>
+          <span class="quota-lbl"><span class="en">Update</span></span>
+          <b class="mono" id="gh-mini-ver">V{{VERSION}}</b>
+          <span class="upd-dot" id="gh-upd-dot" hidden>NEW</span>
+        </button>
+
+        <button class="btn danger sm-btn" id="btn-kill" type="button">
+          <svg class="ic ic-sm"><use href="#i-power"/></svg>
+          <span class="fa" id="kill-fa">Kill switch: off</span>
+          <span class="en" id="kill-en">Kill switch: off</span>
+        </button>
+        <button class="btn ghost sm-btn" id="btn-logout" type="button">
+          <svg class="ic ic-sm"><use href="#i-lock"/></svg>
+          <span class="en">Logout</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 6 Editorial Section Tabs -->
+    <nav class="nav-tabs" aria-label="Panel Sections">
+      <button class="tab-btn active" data-tab="sub" type="button">
+        <span class="tab-lbl"><svg class="ic ic-sm"><use href="#i-qr"/></svg><span class="en">Overview</span></span>
+        <span class="tnum">01</span>
+      </button>
+      <button class="tab-btn" data-tab="users" type="button">
+        <span class="tab-lbl"><svg class="ic ic-sm"><use href="#i-users"/></svg><span class="en">Subscribers</span></span>
+        <span class="tnum">02</span>
+      </button>
+      <button class="tab-btn" data-tab="net" type="button">
+        <span class="tab-lbl"><svg class="ic ic-sm"><use href="#i-bolt"/></svg><span class="en">Network</span></span>
+        <span class="tnum">03</span>
+      </button>
+      <button class="tab-btn" data-tab="route" type="button">
+        <span class="tab-lbl"><svg class="ic ic-sm"><use href="#i-globe"/></svg><span class="en">Routing &amp; DoH</span></span>
+        <span class="tnum">04</span>
+      </button>
+      <button class="tab-btn" data-tab="advisor" type="button">
+        <span class="tab-lbl"><svg class="ic ic-sm"><use href="#i-radar"/></svg><span class="en">ISP advisor</span></span>
+        <span class="tnum">05</span>
+      </button>
+      <button class="tab-btn" data-tab="sec" type="button">
+        <span class="tab-lbl"><svg class="ic ic-sm"><use href="#i-shield"/></svg><span class="en">Security &amp; backup</span></span>
+        <span class="tnum">06</span>
+      </button>
+    </nav>
+
+    <!-- ─────────────── TAB 1: DISPATCH, LIVE CHART & SUBSCRIPTIONS ─────────────── -->
+    <div class="tab-pane" id="pane-sub">
+
+      <!-- Dynamic Theme-Native Monochrome Telemetry & Usage Chart -->
+      <div class="card telemetry-card">
+        <div class="telemetry-head">
+          <p class="kicker" style="margin:0">
+            <svg class="ic"><use href="#i-chart"/></svg>
+            <span class="en">Live telemetry &amp; subscriber usage</span>
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+            <div class="seg-grp" role="group" aria-label="Chart Mode">
+              <button class="seg-btn active" id="chart-mode-live" type="button">
+                <svg class="ic ic-sm"><use href="#i-chart"/></svg>
+                <span class="en">Live speed &amp; RTT</span>
+              </button>
+              <button class="seg-btn" id="chart-mode-usage" type="button">
+                <svg class="ic ic-sm"><use href="#i-bars"/></svg>
+                <span class="en">Subscriber usage</span>
+              </button>
+            </div>
+            <button class="btn ghost sm-btn" id="btn-speed-burst" type="button">
+              <svg class="ic ic-sm" id="speed-burst-ic"><use href="#i-bolt"/></svg>
+              <span class="en">Burst speed test</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="telemetry-kpis">
+          <div class="kpi-box">
+            <span><span class="en">Edge ping (RTT)</span></span>
+            <b id="kpi-rtt">— ms</b>
+          </div>
+          <div class="kpi-box">
+            <span><span class="en">Line jitter</span></span>
+            <b id="kpi-jitter">— ms</b>
+          </div>
+          <div class="kpi-box">
+            <span><span class="en">Edge throughput</span></span>
+            <b id="kpi-speed">— Mbps</b>
+          </div>
+          <div class="kpi-box">
+            <span><span class="en">Total consumed</span></span>
+            <b id="kpi-total-bw">0 B</b>
+          </div>
+        </div>
+
+        <div class="chart-stage">
+          <canvas id="telemetry-canvas" width="960" height="176" aria-label="Monochrome Telemetry Chart"></canvas>
+        </div>
+
+        <div class="chart-foot">
+          <div class="chart-legend" id="chart-legend-live">
+            <span class="leg-item">
+              <svg class="ic ic-sm"><use href="#i-trace-solid"/></svg>
+              <span class="en">Solid: edge throughput (Mbps)</span>
+            </span>
+            <span class="leg-sep" aria-hidden="true">·</span>
+            <span class="leg-item">
+              <svg class="ic ic-sm"><use href="#i-trace-dash"/></svg>
+              <span class="en">Dashed: Cloudflare edge RTT (ms)</span>
+            </span>
+          </div>
+          <div class="chart-legend" id="chart-legend-usage" hidden>
+            <span class="leg-item">
+              <svg class="ic ic-sm"><use href="#i-bar-hatch"/></svg>
+              <span class="en">Usage and quota bars per subscriber</span>
+            </span>
+          </div>
+          <span class="mono sm" id="chart-sample-lbl">SAMPLES · 0</span>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="card">
+          <div class="stat-strip" style="margin-bottom:10px">
+            <p class="kicker" style="margin:0"><svg class="ic"><use href="#i-users"/></svg><span class="en">Subscriber card</span></p>
+            <button class="btn ghost sm-btn" id="go-add-user" type="button">
+              <svg class="ic ic-sm"><use href="#i-plus"/></svg>
+              <span class="en">New user</span>
+            </button>
+          </div>
+
+          <label class="fld-label" for="sel-user"><span class="en">Active subscriber</span></label>
+          <select id="sel-user"></select>
+
+          <div class="specs" style="margin-top:10px">
+            <table class="specs">
+              <tbody>
+                <tr><th><span class="en">Status</span></th><td id="u-status-cell">—</td></tr>
+                <tr><th><span class="en">Bandwidth</span></th><td class="mono" id="u-bw-cell">—</td></tr>
+                <tr><th><span class="en">Expiry</span></th><td id="u-exp-cell">—</td></tr>
+                <tr><th><span class="en">VLESS UUID</span></th><td class="mono" style="font-size:11px;word-break:break-all" id="u-uuid-cell">—</td></tr>
+                <tr><th><span class="en">Trojan pass</span></th><td class="mono" id="u-tr-cell">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="meter" style="margin-top:8px"><i id="u-meter" style="width:0%"></i></div>
+
+          <p class="kicker" style="margin-top:16px"><svg class="ic"><use href="#i-copy"/></svg><span class="en">Multi-client subscription links</span></p>
+          <div class="sub-grid">
+            <button class="btn primary sm-btn" id="cp-b64" type="button">
+              <svg class="ic ic-sm"><use href="#i-copy"/></svg>
+              <span class="en">Normal sub (Base64)</span>
+            </button>
+            <button class="btn sm-btn" id="cp-xray" type="button">
+              <svg class="ic ic-sm"><use href="#i-bolt"/></svg>
+              <span class="en">Fragment sub (Xray)</span>
+            </button>
+            <button class="btn sm-btn" id="cp-sb" type="button">
+              <svg class="ic ic-sm"><use href="#i-copy"/></svg>
+              <span class="en">Sing-box / Hiddify</span>
+            </button>
+            <button class="btn sm-btn" id="cp-clash" type="button">
+              <svg class="ic ic-sm"><use href="#i-copy"/></svg>
+              <span class="en">Clash / Mihomo YAML</span>
+            </button>
+            <button class="btn ghost sm-btn" id="cp-doh" type="button">
+              <svg class="ic ic-sm"><use href="#i-globe"/></svg>
+              <span class="en">Private DoH URL</span>
+            </button>
+            <a class="btn ghost sm-btn" id="open-pass" href="#" target="_blank" rel="noopener">
+              <span class="en">Subscriber page</span>
+              <svg class="ic ic-sm"><use href="#i-external"/></svg>
+            </a>
+          </div>
+          <p class="hint">
+            <span class="en">Normal carries URI-compatible IP, port, WS path and TLS fingerprint settings. Fragment remains a separate JSON config for compatible clients; a standard URI cannot reliably carry true Fragment. Advisor changes reach Normal after Apply &amp; Save.</span>
+          </p>
+
+          <div class="tg-box mt-auto" id="dash-tg-box">
+            <p class="kicker" style="margin:0 0 8px">
+              <svg class="ic"><use href="#i-send"/></svg>
+              <span class="en">Official Telegram Web Proxy (no VPN app needed)</span>
+            </p>
+            <div class="actions" style="margin-top:6px">
+              <a class="btn primary sm-btn" id="dash-tg-open" href="#">
+                <svg class="ic ic-sm"><use href="#i-send"/></svg>
+                <span class="en">Connect in Telegram</span>
+              </a>
+              <button class="btn ghost sm-btn" id="dash-tg-copy" type="button">
+                <svg class="ic ic-sm"><use href="#i-copy"/></svg>
+                <span class="en">Copy t.me link</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <p class="kicker"><svg class="ic"><use href="#i-qr"/></svg><span class="en">QR code &amp; generated nodes</span></p>
+          <div class="qr-center">
+            <div class="qrbox"><div class="qr" id="main-qr"></div></div>
+            <p class="mono sm" id="qr-caption" style="margin:9px 0 0;word-break:break-all">NORMAL SUBSCRIPTION</p>
+          </div>
+          <div class="actions" style="justify-content:center;margin-top:8px">
+            <button class="btn ghost sm-btn" id="qr-btn-b64" type="button">Normal QR</button>
+            <button class="btn ghost sm-btn" id="qr-btn-xray" type="button">Fragment QR</button>
+            <button class="btn ghost sm-btn" id="qr-btn-sb" type="button">Sing-box QR</button>
+            <button class="btn ghost sm-btn" id="qr-btn-tg" type="button">Telegram QR</button>
+          </div>
+
+          <div class="dotted" style="margin:12px 0"></div>
+          <p class="kicker"><svg class="ic"><use href="#i-server"/></svg><span class="en">GENERATED NODES (<span id="node-count-en">0</span>)</span></p>
+          <div class="node-list" id="admin-nodes" style="flex:1;max-height:380px"></div>
+        </div>
+      </div>
+
+      <section class="card client-directory" aria-label="Official client sources">
+        <p class="kicker"><svg class="ic"><use href="#i-external"/></svg><span class="en">Official client sources by operating system</span></p>
+        <p class="hint"><span class="en">Links open the developer's repository; closed-source iOS apps link to their official App Store listing and may be paid. Avoid unofficial downloads; verify subscription format compatibility in each app.</span></p>
+        <div class="client-os-grid">
+          <div class="client-os"><h3>Windows</h3><div class="client-links">
+            <a class="client-link" href="https://github.com/2dust/v2rayN" target="_blank" rel="noopener noreferrer"><img class="client-logo" src="{{ICON_V2RAYN}}" width="23" height="23" alt="" loading="lazy"><span>v2rayN</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+            <a class="client-link" href="https://github.com/hiddify/hiddify-app" target="_blank" rel="noopener noreferrer"><img class="client-logo" src="{{ICON_HIDDIFY}}" width="23" height="23" alt="" loading="lazy"><span>Hiddify</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+            <a class="client-link" href="https://github.com/clash-verge-rev/clash-verge-rev" target="_blank" rel="noopener noreferrer"><img class="client-logo" src="{{ICON_CLASH}}" width="23" height="23" alt="" loading="lazy"><span>Clash Verge Rev</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+          </div></div>
+          <div class="client-os"><h3>Linux</h3><div class="client-links">
+            <a class="client-link" href="https://github.com/2dust/v2rayN" target="_blank" rel="noopener noreferrer"><img class="client-logo" src="{{ICON_V2RAYN}}" width="23" height="23" alt="" loading="lazy"><span>v2rayN</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+            <a class="client-link" href="https://github.com/hiddify/hiddify-app" target="_blank" rel="noopener noreferrer"><img class="client-logo" src="{{ICON_HIDDIFY}}" width="23" height="23" alt="" loading="lazy"><span>Hiddify</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+            <a class="client-link" href="https://github.com/clash-verge-rev/clash-verge-rev" target="_blank" rel="noopener noreferrer"><img class="client-logo" src="{{ICON_CLASH}}" width="23" height="23" alt="" loading="lazy"><span>Clash Verge Rev</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+            <a class="client-link" href="https://github.com/SagerNet/sing-box" target="_blank" rel="noopener noreferrer"><img class="client-logo" src="{{ICON_SINGBOX}}" width="23" height="23" alt="" loading="lazy"><span>sing-box CLI</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+          </div></div>
+          <div class="client-os"><h3>Android</h3><div class="client-links">
+            <a class="client-link" href="https://github.com/2dust/v2rayNG" target="_blank" rel="noopener noreferrer"><img class="client-logo" src="{{ICON_V2RAYNG}}" width="23" height="23" alt="" loading="lazy"><span>v2rayNG</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+            <a class="client-link" href="https://github.com/hiddify/hiddify-app" target="_blank" rel="noopener noreferrer"><img class="client-logo" src="{{ICON_HIDDIFY}}" width="23" height="23" alt="" loading="lazy"><span>Hiddify</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+          </div></div>
+          <div class="client-os"><h3>macOS</h3><div class="client-links">
+            <a class="client-link" href="https://github.com/2dust/v2rayN" target="_blank" rel="noopener noreferrer"><img class="client-logo" src="{{ICON_V2RAYN}}" width="23" height="23" alt="" loading="lazy"><span>v2rayN</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+            <a class="client-link" href="https://github.com/hiddify/hiddify-app" target="_blank" rel="noopener noreferrer"><img class="client-logo" src="{{ICON_HIDDIFY}}" width="23" height="23" alt="" loading="lazy"><span>Hiddify</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+            <a class="client-link" href="https://github.com/clash-verge-rev/clash-verge-rev" target="_blank" rel="noopener noreferrer"><img class="client-logo" src="{{ICON_CLASH}}" width="23" height="23" alt="" loading="lazy"><span>Clash Verge Rev</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+          </div></div>
+          <div class="client-os"><h3>iOS / iPadOS</h3><div class="client-links">
+            <a class="client-link" href="https://github.com/hiddify/hiddify-app" target="_blank" rel="noopener noreferrer"><img class="client-logo" src="{{ICON_HIDDIFY}}" width="23" height="23" alt="" loading="lazy"><span>Hiddify</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+            <a class="client-link" href="https://apps.apple.com/us/app/shadowrocket/id932747118" target="_blank" rel="noopener noreferrer"><span class="client-store mono" aria-hidden="true">STORE</span><span>Shadowrocket</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+            <a class="client-link" href="https://apps.apple.com/us/app/streisand/id6450534064" target="_blank" rel="noopener noreferrer"><span class="client-store mono" aria-hidden="true">STORE</span><span>Streisand</span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-external"/></svg></a>
+          </div></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ─────────────────── TAB 2: SUBSCRIBERS ─────────────────── -->
+    <div class="tab-pane" id="pane-users" hidden>
+      <div class="stack">
+        <div class="card">
+          <div class="stat-strip">
+            <p class="kicker" style="margin:0"><svg class="ic"><use href="#i-plus"/></svg><span class="fa" id="uf-title-fa">Add a subscriber</span><span class="en" id="uf-title-en">Add new subscriber</span></p>
+            <button class="btn ghost sm-btn" id="uf-reset" type="button" hidden>
+              <svg class="ic ic-sm"><use href="#i-x"/></svg>
+              <span class="en">Cancel edit</span>
+            </button>
+          </div>
+
+          <form id="f-user" style="margin-top:12px">
+            <input type="hidden" id="uf-id" value="">
+            <div class="field-grid">
+              <div>
+                <label class="fld-label" for="uf-name"><span class="en">Subscriber name</span></label>
+                <input id="uf-name" type="text" autocomplete="off" required placeholder="e.g. Alex · phone">
+              </div>
+              <div>
+                <label class="fld-label" for="uf-note"><span class="en">Note (optional)</span></label>
+                <input id="uf-note" type="text" autocomplete="off" placeholder="e.g. home fiber, personal">
+              </div>
+              <div>
+                <label class="fld-label" for="uf-gb"><span class="en">Quota limit GB (0 = unlimited)</span></label>
+                <input id="uf-gb" type="number" min="0" step="0.5" value="0">
+              </div>
+              <div>
+                <label class="fld-label" for="uf-days"><span class="en">Expiry days (0 = never)</span></label>
+                <input id="uf-days" type="number" min="0" step="1" value="0">
+              </div>
+              <div>
+                <label class="fld-label" for="uf-uuid"><span class="en">VLESS UUID</span></label>
+                <div class="fld">
+                  <input id="uf-uuid" dir="ltr" type="text" autocomplete="off" placeholder="auto">
+                  <button class="mini" id="uf-gen-uuid" type="button" title="Mint UUID"><svg class="ic"><use href="#i-refresh"/></svg></button>
+                </div>
+              </div>
+              <div>
+                <label class="fld-label" for="uf-tr"><span class="en">Trojan password</span></label>
+                <div class="fld">
+                  <input id="uf-tr" dir="ltr" type="text" autocomplete="off" placeholder="auto">
+                  <button class="mini" id="uf-gen-tr" type="button" title="Mint Password"><svg class="ic"><use href="#i-key"/></svg></button>
+                </div>
+              </div>
+              <div class="field-full">
+                <label class="chk">
+                  <input id="uf-first" type="checkbox">
+                  <span>
+                    <span class="en">Start expiry countdown on <strong>first actual connection</strong></span>
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div class="actions">
+              <button class="btn primary" type="submit">
+                <svg class="ic ic-sm"><use href="#i-check"/></svg>
+                <span class="fa" id="uf-submit-fa">Create subscriber</span><span class="en" id="uf-submit-en">Save subscriber</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <p class="kicker"><svg class="ic"><use href="#i-users"/></svg><span class="en">Subscribers</span></p>
+          <div class="user-list" id="users-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────── TAB 3: NETWORK, CLEAN IP & FRAGMENT ─────────────── -->
+    <div class="tab-pane" id="pane-net" hidden>
+      <div class="cols-even">
+        <!-- Protocols & TLS -->
+        <div class="card">
+          <p class="kicker"><svg class="ic"><use href="#i-sliders"/></svg><span class="en">Protocols, ports &amp; TLS</span></p>
+          <div class="check-list">
+            <label class="chk"><input type="checkbox" id="s-vless"><span><strong>VLESS</strong> over WS</span></label>
+            <label class="chk"><input type="checkbox" id="s-trojan"><span><strong>Trojan</strong> over WS</span></label>
+            <label class="chk field-full"><input type="checkbox" id="s-http-on"><span><span class="en">Include non-TLS HTTP ports (80/8080)</span></span></label>
+          </div>
+
+          <p class="fld-label" style="margin-top:12px"><span class="en">Cloudflare TLS ports (all checked ports emit nodes)</span></p>
+          <div class="check-list ports-grid" id="tls-ports-box">
+            <label class="chk"><input type="checkbox" value="443"><span>443</span></label>
+            <label class="chk"><input type="checkbox" value="8443"><span>8443</span></label>
+            <label class="chk"><input type="checkbox" value="2053"><span>2053</span></label>
+            <label class="chk"><input type="checkbox" value="2083"><span>2083</span></label>
+            <label class="chk"><input type="checkbox" value="2087"><span>2087</span></label>
+            <label class="chk"><input type="checkbox" value="2096"><span>2096</span></label>
+          </div>
+
+          <p class="fld-label" style="margin-top:10px"><span class="en">Cloudflare HTTP ports (when non-TLS is enabled)</span></p>
+          <div class="check-list ports-grid" id="http-ports-box">
+            <label class="chk"><input type="checkbox" value="80"><span>80</span></label>
+            <label class="chk"><input type="checkbox" value="8080"><span>8080</span></label>
+            <label class="chk"><input type="checkbox" value="8880"><span>8880</span></label>
+            <label class="chk"><input type="checkbox" value="2052"><span>2052</span></label>
+            <label class="chk"><input type="checkbox" value="2082"><span>2082</span></label>
+            <label class="chk"><input type="checkbox" value="2086"><span>2086</span></label>
+            <label class="chk"><input type="checkbox" value="2095"><span>2095</span></label>
+          </div>
+
+          <div class="field-grid mt-auto">
+            <div>
+              <label class="fld-label" for="s-fp"><span class="en">uTLS fingerprint</span></label>
+              <select id="s-fp">
+                <option value="chrome">chrome</option>
+                <option value="firefox">firefox</option>
+                <option value="safari">safari</option>
+                <option value="ios">ios</option>
+                <option value="android">android</option>
+                <option value="edge">edge</option>
+                <option value="randomized">randomized</option>
+              </select>
+            </div>
+            <div>
+              <label class="fld-label" for="s-alpn">ALPN</label>
+              <select id="s-alpn">
+                <option value="http/1.1">http/1.1 (required for WebSocket)</option>
+              </select>
+            </div>
+            <div>
+              <label class="fld-label" for="s-ed"><span class="en">Early data</span></label>
+              <select id="s-ed">
+                <option value="2048">2048 (Standard)</option>
+                <option value="2560">2560 (Max)</option>
+                <option value="0">0 (Off)</option>
+              </select>
+            </div>
+            <div>
+              <label class="fld-label" for="s-wspath"><span class="en">WS path</span></label>
+              <input id="s-wspath" dir="ltr" type="text" value="/">
+            </div>
+          </div>
+        </div>
+
+        <!-- Fragment & Anti-DPI + Clean IPs stacked cleanly to match height -->
+        <div class="card">
+          <p class="kicker"><svg class="ic"><use href="#i-bolt"/></svg><span class="en">Anti-DPI fragmentation</span></p>
+          <label class="chk">
+            <input type="checkbox" id="s-frag-on">
+            <span>
+              <span class="en">Enable TLS fragmentation in Xray &amp; Sing-box subscriptions</span>
+            </span>
+          </label>
+
+          <div class="actions" style="margin-top:10px">
+            <button class="btn ghost sm-btn frag-preset" data-p="1-1" data-l="10-20" data-i="10-20" type="button">
+              <span class="en">Severe (1-1)</span>
+            </button>
+            <button class="btn ghost sm-btn frag-preset" data-p="tlshello" data-l="10-20" data-i="10-20" type="button">
+              <span class="en">tlshello</span>
+            </button>
+            <button class="btn ghost sm-btn frag-preset" data-p="1-3" data-l="20-50" data-i="10-20" type="button">
+              <span class="en">Mild (1-3)</span>
+            </button>
+          </div>
+
+          <div class="field-grid" style="margin-top:10px">
+            <div>
+              <label class="fld-label" for="s-frag-pkt">Packets</label>
+              <input id="s-frag-pkt" dir="ltr" type="text" value="1-1">
+            </div>
+            <div>
+              <label class="fld-label" for="s-frag-len">Length (bytes)</label>
+              <input id="s-frag-len" dir="ltr" type="text" value="10-20">
+            </div>
+            <div>
+              <label class="fld-label" for="s-frag-int">Interval (ms)</label>
+              <input id="s-frag-int" dir="ltr" type="text" value="10-20">
+            </div>
+            <div style="display:flex;align-items:flex-end">
+              <label class="chk" style="width:100%">
+                <input type="checkbox" id="s-noise">
+                <span><span class="en">UDP Noise (Xray)</span></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="dotted" style="margin:14px 0"></div>
+
+          <div class="mt-auto" style="padding-top:0">
+            <label class="fld-label" for="s-custom-domains">
+              <span class="en">Custom domains (selected ports; verify each port in a real client)</span>
+            </label>
+            <textarea id="s-custom-domains" style="min-height:76px" placeholder="sub.yourdomain.com"></textarea>
+            <p class="hint" style="margin-top:8px">
+              <span class="en">Fragment settings apply to compatible JSON client configs. Test them per network and app; no bypass is guaranteed. Standard Normal URIs do not carry actual Fragment settings.</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Clean IPs + Browser Scanner -->
+        <div class="card">
+          <p class="kicker"><svg class="ic"><use href="#i-radar"/></svg><span class="en">Clean IPs, domains &amp; browser scanner</span></p>
+          <label class="fld-label" for="s-cleanips">
+            <span class="en">YOUR IPs / DOMAINS (ONE PER LINE; APPROX. COUNTRY TAG: <code>172.67.73.163#US|MCI</code>)</span>
+          </label>
+          <textarea id="s-cleanips" style="flex:1;min-height:120px"></textarea>
+
+          <div class="actions" style="margin-top:10px">
+            <button class="btn primary sm-btn" id="btn-scan-user-list" type="button">
+              <svg class="ic ic-sm"><use href="#i-bolt"/></svg>
+              <span class="en">Scan your listed IPs</span>
+            </button>
+            <button class="btn ghost sm-btn" id="btn-prune-clean" type="button" hidden>
+              <svg class="ic ic-sm"><use href="#i-check"/></svg>
+              <span class="en">Prioritize responses (keep IPs)</span>
+            </button>
+            <button class="btn ghost sm-btn" id="btn-scan-clean" type="button">
+              <svg class="ic ic-sm"><use href="#i-radar"/></svg>
+              <span class="en">Official CF ranges</span>
+            </button>
+            <button class="btn ghost sm-btn" id="btn-add-presets" type="button">
+              <svg class="ic ic-sm"><use href="#i-plus"/></svg>
+              <span class="en">Add presets</span>
+            </button>
+          </div>
+          <div class="range-panel" id="cf-ranges-panel" hidden>
+            <div class="stat-strip">
+              <strong class="fld-label" style="margin:0"><span class="en">Source: </span><a class="inline-link mono" href="https://api.cloudflare.com/client/v4/ips" target="_blank" rel="noopener noreferrer">Cloudflare Public IP API <svg class="ic ic-sm"><use href="#i-external"/></svg></a></strong>
+              <span class="mono sm" id="cf-ranges-total">—</span>
+            </div>
+            <p class="hint"><span class="en">Counts include all addresses per CIDR, not only usable ones. Choose 0–12 samples per range, 48 total max. GeoIP country is approximate, not a proven edge location. Raw-IP browser requests cannot verify Worker connectivity because of TLS/SNI; these are client-test candidates only.</span></p>
+            <div class="range-list" id="cf-range-list"></div>
+            <div class="actions"><button class="btn primary sm-btn" type="button" id="btn-scan-ranges"><svg class="ic ic-sm"><use href="#i-radar"/></svg><span class="en">Sample &amp; probe candidates</span></button></div>
+          </div>
+          <p class="hint" id="scan-summary" hidden></p>
+          <div id="scan-results" class="scan-grid" hidden></div>
+        </div>
+
+        <!-- Outbound ProxyIP, NAT64, Chain -->
+        <div class="card">
+          <p class="kicker"><svg class="ic"><use href="#i-globe"/></svg><span class="en">Outbound: ProxyIP, NAT64 &amp; chain</span></p>
+          <label class="fld-label" for="s-proxyips">
+            <span class="en">Proxy IPs (fallback for Cloudflare-hosted sites like Speedtest)</span>
+          </label>
+          <textarea id="s-proxyips" style="min-height:66px" placeholder="ProxyIP.NL.CMLiussss.net"></textarea>
+          <div class="actions" style="margin-top:8px">
+            <button class="btn ghost sm-btn" id="btn-test-proxyip" type="button">
+              <svg class="ic ic-sm"><use href="#i-radar"/></svg>
+              <span class="en">Test ProxyIP from Worker</span>
+            </button>
+            <span class="mono sm" id="proxyip-res"></span>
+          </div>
+
+          <div style="margin-top:12px">
+            <label class="chk">
+              <input type="checkbox" id="s-nat64-on">
+              <span><span class="en">Enable NAT64 IPv6 fallback</span></span>
+            </label>
+            <textarea id="s-nat64" style="min-height:56px;margin-top:6px"></textarea>
+          </div>
+
+          <div class="mt-auto">
+            <label class="fld-label" for="s-chain">
+              <span class="en">Chain outbound proxy (SOCKS5 / HTTP for a fixed exit IP)</span>
+            </label>
+            <div class="fld">
+              <input id="s-chain" dir="ltr" type="text" placeholder="socks5://user:pass@1.2.3.4:1080">
+              <button class="btn ghost sm-btn" id="btn-test-chain" type="button">TEST</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- XHTTP transport card -->
+        <div class="card field-full xhttp-card" id="xhttp-card">
+          <p class="kicker">
+            <svg class="ic"><use href="#i-trace-solid"/></svg>
+            <span class="en">XHTTP transport</span>
+            <span class="badge" id="xhttp-state">Off</span>
+          </p>
+          <div class="xhttp-grid">
+            <div class="xhttp-copy">
+              <label class="chk">
+                <input type="checkbox" id="s-xhttp">
+                <span><strong>VLESS over XHTTP</strong> <span class="en">(stream-one, HTTP/2)</span><small class="chk-sub">Adds an XHTTP node next to every TLS VLESS node. Plain HTTP streaming instead of a WebSocket upgrade, so it slips past networks that throttle or break WebSockets.</small></span>
+              </label>
+              <ul class="compat">
+                <li class="yes">v2rayNG · v2rayN · Streisand</li>
+                <li class="yes">Hiddify (Xray core) · Xray JSON</li>
+                <li class="no">sing-box &amp; Clash / Mihomo profiles skip it</li>
+              </ul>
+            </div>
+            <div class="xhttp-fields">
+              <div>
+                <label class="fld-label" for="s-xhttp-path"><span class="en">XHTTP path</span></label>
+                <input id="s-xhttp-path" dir="ltr" type="text" value="/xh" maxlength="64" placeholder="/xh">
+              </div>
+              <div>
+                <span class="fld-label"><span class="en">Clients dial</span></span>
+                <div class="endpoint-row">
+                  <code class="endpoint mono" id="xhttp-endpoint">your-worker.workers.dev/xh</code>
+                  <button class="mini" id="btn-xhttp-copy" type="button" title="Copy endpoint" aria-label="Copy endpoint"><svg class="ic"><use href="#i-copy"/></svg></button>
+                </div>
+              </div>
+              <p class="hint">TLS ports only, ALPN <code>h2</code>, mode <code>stream-one</code>. The path can't be <code>/</code> or overlap <code>/api</code>, <code>/sub</code>, <code>/panel</code> or <code>/dns-query</code>.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Official Telegram Web Proxy Card -->
+        <div class="card field-full">
+          <p class="kicker">
+            <svg class="ic"><use href="#i-send"/></svg>
+            <span class="en">Official Telegram Web Proxy (desktop &amp; Android)</span>
+          </p>
+          <label class="chk">
+            <input type="checkbox" id="s-tgproxy">
+            <span>
+              <span class="en">Enable Official Telegram Web Proxy (<code>tg://webproxy</code>) on this Worker</span>
+            </span>
+          </label>
+          <div class="field-grid" style="margin-top:10px">
+            <div>
+              <label class="fld-label" for="s-tgsecret"><span class="en">32-character hex secret</span></label>
+              <div class="fld">
+                <input id="s-tgsecret" dir="ltr" type="text" maxlength="34" placeholder="auto-generated 32-hex">
+                <button class="mini" id="btn-gen-tgsecret" type="button" title="Generate new secret"><svg class="ic"><use href="#i-refresh"/></svg></button>
+              </div>
+            </div>
+            <div>
+              <label class="fld-label" for="s-tgdomain"><span class="en">Optional custom domain (blank = current host)</span></label>
+              <input id="s-tgdomain" dir="ltr" type="text" placeholder="tg.yourdomain.com">
+            </div>
+          </div>
+          <div class="actions" style="margin-top:10px">
+            <a class="btn primary sm-btn" id="set-tg-open" href="#">
+              <svg class="ic ic-sm"><use href="#i-send"/></svg>
+              <span class="en">Connect in Telegram</span>
+            </a>
+            <button class="btn ghost sm-btn" id="set-tg-copy" type="button">
+              <svg class="ic ic-sm"><use href="#i-copy"/></svg>
+              <span class="en">Copy shareable t.me link</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" id="save-net" type="button">
+          <svg class="ic ic-sm"><use href="#i-check"/></svg>
+          <span class="en">Save network &amp; fragment settings</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ─────────────── TAB 4: ROUTING & PRIVATE DoH ─────────────── -->
+    <div class="tab-pane" id="pane-route" hidden>
+      <div class="cols-even">
+        <div class="card">
+          <p class="kicker"><svg class="ic"><use href="#i-globe"/></svg><span class="en">Private DoH &amp; DNS servers</span></p>
+          <div class="stack" style="margin-top:6px;gap:10px">
+            <div>
+              <label class="fld-label" for="s-updoh"><span class="en">Worker upstream DoH</span></label>
+              <select id="s-updoh">
+                <option value="https://1.1.1.1/dns-query">Cloudflare (https://1.1.1.1/dns-query)</option>
+                <option value="https://dns.google/dns-query">Google (https://dns.google/dns-query)</option>
+                <option value="https://dns.quad9.net/dns-query">Quad9 Security (https://dns.quad9.net/dns-query)</option>
+                <option value="https://unfiltered.adguard-dns.com/dns-query">AdGuard Unfiltered</option>
+              </select>
+            </div>
+            <div>
+              <label class="fld-label" for="s-remotedns"><span class="en">Client remote DNS</span></label>
+              <select id="s-remotedns">
+                <option value="private-doh">Private DoH (/dns-query/&lt;token&gt; on this Worker)</option>
+                <option value="cloudflare">Cloudflare DoH (1.1.1.1)</option>
+                <option value="google">Google DoH (dns.google)</option>
+                <option value="quad9">Quad9 DoH (dns.quad9.net)</option>
+              </select>
+            </div>
+            <div>
+              <label class="fld-label" for="s-directdns"><span class="en">Direct domestic DNS</span></label>
+              <input id="s-directdns" dir="ltr" type="text" value="8.8.8.8">
+            </div>
+          </div>
+
+          <p class="kicker" style="margin-top:16px"><svg class="ic"><use href="#i-sliders"/></svg><span class="en">Smart routing switches</span></p>
+          <div class="check-list" style="grid-template-columns:1fr;gap:6px">
+            <label class="chk"><input type="checkbox" id="r-ir"><span><span class="en">Bypass Iran (.ir &amp; geoip:ir direct)</span></span></label>
+            <label class="chk"><input type="checkbox" id="r-lan"><span><span class="en">Bypass private LAN IPs</span></span></label>
+            <label class="chk"><input type="checkbox" id="r-quic"><span><span class="en">Block QUIC (UDP 443)</span></span></label>
+            <label class="chk"><input type="checkbox" id="r-ads"><span><span class="en">Block ads, trackers &amp; malware</span></span></label>
+            <label class="chk"><input type="checkbox" id="r-adult"><span><span class="en">Block adult content</span></span></label>
+            <label class="chk"><input type="checkbox" id="r-sanction"><span><span class="en">Force sanctioned / AI domains through the tunnel</span></span></label>
+            <label class="chk"><input type="checkbox" id="r-cn"><span><span class="en">Bypass China (CN)</span></span></label>
+            <label class="chk"><input type="checkbox" id="r-ru"><span><span class="en">Bypass Russia (RU)</span></span></label>
+          </div>
+        </div>
+
+        <div class="card">
+          <p class="kicker"><svg class="ic"><use href="#i-compass"/></svg><span class="en">Custom domain routing lists</span></p>
+          <div class="stack" style="margin-top:6px;gap:12px;flex:1">
+            <div style="display:flex;flex-direction:column;flex:1">
+              <label class="fld-label" for="r-proxy-list"><span class="en">Force proxy domains (AI / sanctioned)</span></label>
+              <textarea id="r-proxy-list" style="flex:1;min-height:120px"></textarea>
+            </div>
+            <div style="display:flex;flex-direction:column;flex:1">
+              <label class="fld-label" for="r-direct-list"><span class="en">Force direct domains</span></label>
+              <textarea id="r-direct-list" style="flex:1;min-height:92px" placeholder="digikala.com"></textarea>
+            </div>
+            <div style="display:flex;flex-direction:column;flex:1">
+              <label class="fld-label" for="r-block-list"><span class="en">Force blocked domains</span></label>
+              <textarea id="r-block-list" style="flex:1;min-height:92px"></textarea>
+            </div>
+          </div>
+          <p class="hint mt-auto">
+            <span class="en">With <code>Private DoH</code> enabled, client DNS queries tunnel through <code>/dns-query/&lt;token&gt;</code> on this Worker with zero DNS leakage.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" id="save-route" type="button">
+          <svg class="ic ic-sm"><use href="#i-check"/></svg>
+          <span class="en">Save routing &amp; DNS settings</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ─────────────── TAB 5: SMART BROWSER ISP & NETWORK ADVISOR ─────────────── -->
+    <div class="tab-pane" id="pane-advisor" hidden>
+      <div class="card" id="advisor-master-card">
+        <div class="stat-strip">
+          <p class="kicker" style="margin:0">
+            <svg class="ic"><use href="#i-radar"/></svg>
+            <span class="en">Smart browser ISP &amp; connectivity advisor</span>
+          </p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn primary sm-btn" id="btn-adv-run" type="button">
+              <svg class="ic ic-sm" id="adv-run-ic"><use href="#i-radar"/></svg>
+              <span class="en">Run full ISP diagnostic</span>
+            </button>
+            <button class="btn sm-btn" id="btn-adv-apply" type="button" hidden>
+              <svg class="ic ic-sm"><use href="#i-check"/></svg>
+              <span class="en">Apply supported changes &amp; save</span>
+            </button>
+            <button class="btn ghost sm-btn" id="btn-adv-close-guest" type="button" hidden>
+              <svg class="ic ic-sm"><use href="#i-x"/></svg>
+              <span class="en">Close</span>
+            </button>
+          </div>
+        </div>
+
+        <p class="labor" style="margin:8px 0 0">
+          <span class="en">This tool observes browser transport responses and samples upload/download to this Worker. Opaque no-CORS requests cannot reveal HTTP status, geo restrictions, or the reason for failure. A port response on a different host does not prove your Worker works there. Recommendations reflect the admin's network, not every subscriber's.</span>
+        </p>
+
+        <div class="adv-summary" id="adv-summary-box">
+          <div class="adv-verdict" id="adv-verdict">
+            <span class="en">Run browser transport and bounded Worker upload/download probes. An inconclusive result does not prove a site is blocked.</span>
+          </div>
+          <div class="adv-path-metrics" id="adv-path-metrics" hidden>
+            <div><span><span class="en">Worker download</span></span><strong class="mono" id="adv-down">—</strong></div>
+            <div><span><span class="en">Worker upload</span></span><strong class="mono" id="adv-up">—</strong></div>
+          </div>
+          <ul class="adv-recs" id="adv-recs" hidden></ul>
+        </div>
+
+        <div class="adv-grid" id="adv-grid"></div>
+      </div>
+    </div>
+
+    <!-- ─────────────── TAB 6: STEALTH, SECURITY & BACKUP ─────────────── -->
+    <div class="tab-pane" id="pane-sec" hidden>
+      <div class="cols-even">
+        <div class="stack" style="margin-top:0">
+          <div class="card">
+            <p class="kicker"><svg class="ic"><use href="#i-shield"/></svg><span class="en">Front page &amp; subscription display</span></p>
+
+            <div>
+              <label class="fld-label" for="s-rootmode"><span class="en">What the root path (<code>/</code>) shows</span></label>
+              <select id="s-rootmode">
+                <option value="panel">Show the panel on / and /panel (default)</option>
+                <option value="gazette">Decoy page on / (panel only on /panel)</option>
+                <option value="fallback">Reverse-proxy a site of your choice on / (panel only on /panel)</option>
+              </select>
+            </div>
+            <div style="margin-top:10px">
+              <label class="fld-label" for="s-fallback"><span class="en">Fallback reverse-proxy domain</span></label>
+              <input id="s-fallback" dir="ltr" type="text" placeholder="www.ubuntu.com">
+            </div>
+            <div style="margin-top:10px">
+              <label class="fld-label" for="s-node-prefix"><span class="en">Node name prefix (optional, shown in client apps)</span></label>
+              <input id="s-node-prefix" type="text" maxlength="24" placeholder="e.g. Oryvex">
+            </div>
+            <div style="margin-top:10px">
+              <label class="chk">
+                <input type="checkbox" id="s-infonodes">
+                <span><span class="en">Show bandwidth &amp; expiry info rows in URI subscriptions</span></span>
+              </label>
+            </div>
+            <div class="actions mt-auto">
+              <button class="btn primary" id="save-sec" type="button">
+                <svg class="ic ic-sm"><use href="#i-check"/></svg>
+                <span class="en">Save front-page settings</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Activity Log balanced into Left Column -->
+          <div class="card card-subtle" style="flex:1">
+            <p class="kicker"><svg class="ic"><use href="#i-chart"/></svg><span class="en">Recent activity</span></p>
+            <div class="node-list" id="logs-list" style="flex:1;max-height:190px"></div>
+          </div>
+        </div>
+
+        <div class="stack" style="margin-top:0">
+          <!-- Change Admin Password -->
+          <div class="card">
+            <p class="kicker"><svg class="ic"><use href="#i-lock"/></svg><span class="en">Change admin password</span></p>
+            <form id="f-pass" class="card-fill">
+              <div class="field-grid">
+                <div>
+                  <label class="fld-label" for="pw-cur"><span class="en">Current password</span></label>
+                  <input id="pw-cur" type="password" required>
+                </div>
+                <div>
+                  <label class="fld-label" for="pw-new"><span class="en">New password</span></label>
+                  <input id="pw-new" type="password" required minlength="6">
+                </div>
+              </div>
+              <div class="actions mt-auto">
+                <button class="btn sm-btn" type="submit">
+                  <svg class="ic ic-sm"><use href="#i-key"/></svg>
+                  <span class="en">Update password</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Backup & Restore -->
+          <div class="card" style="flex:1">
+            <p class="kicker"><svg class="ic"><use href="#i-download"/></svg><span class="en">Backup &amp; restore</span></p>
+            <p class="labor" style="margin-bottom:10px">
+              <span class="en">Export all subscribers and settings to a portable JSON file, or restore onto a new Worker:</span>
+            </p>
+            <div class="actions mt-auto">
+              <button class="btn primary sm-btn" id="btn-export" type="button">
+                <svg class="ic ic-sm"><use href="#i-download"/></svg>
+                <span class="en">Export backup JSON</span>
+              </button>
+              <label class="btn ghost sm-btn" style="cursor:pointer">
+                <svg class="ic ic-sm"><use href="#i-upload"/></svg>
+                <span class="en">Import JSON</span>
+                <input id="inp-import" type="file" accept=".json,application/json" hidden>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ────────────────────────────── footer ────────────────────────────── -->
+  <footer>
+    <p class="colophon">
+      <span>OryvexWorkerPanel v{{VERSION}} · <span id="year">2026</span></span>
+      <span>·</span>
+      <a class="inline-link" href="{{REPO_URL}}" target="_blank" rel="noopener">github.com/{{REPO_SLUG}}</a>
+      <span>·</span>
+      <span class="en">Free &amp; open-source · not for sale</span>
+      <span>·</span>
+    </p>
+  </footer>
+</div>
+
+<!-- ─────────── DISPLAY OPTIONS (stored in this browser only) ─────────── -->
+<div class="modal-backdrop" id="display-modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="dp-title">
+    <p class="kicker"><svg class="ic"><use href="#i-palette"/></svg><span class="en">Display options</span></p>
+    <h3 class="card-h" id="dp-title">Make the panel yours</h3>
+    <p class="hint" style="margin-top:4px">Saved in this browser only. Nothing here changes your Worker or subscribers.</p>
+    <div class="pref-list">
+      <div class="pref-row"><span>Theme</span>
+        <div class="seg-grp" data-pref="theme">
+          <button class="seg-btn" type="button" data-val="dark">Dark</button>
+          <button class="seg-btn" type="button" data-val="light">Light</button>
+          <button class="seg-btn" type="button" data-val="system">Match system</button>
+        </div>
+      </div>
+      <div class="pref-row"><span>Accent color</span>
+        <div class="swatches" data-pref="accent">
+          <button class="swatch" type="button" data-val="signal" style="--sw:#c8f03c" aria-label="Signal lime" title="Signal lime"></button>
+          <button class="swatch" type="button" data-val="blue" style="--sw:#0a84ff" aria-label="Blue" title="Blue"></button>
+          <button class="swatch" type="button" data-val="violet" style="--sw:#a07bff" aria-label="Violet" title="Violet"></button>
+          <button class="swatch" type="button" data-val="emerald" style="--sw:#2fd39a" aria-label="Emerald" title="Emerald"></button>
+          <button class="swatch" type="button" data-val="amber" style="--sw:#ffb020" aria-label="Amber" title="Amber"></button>
+          <button class="swatch" type="button" data-val="rose" style="--sw:#ff5a76" aria-label="Rose" title="Rose"></button>
+        </div>
+      </div>
+      <div class="pref-row"><span>Typeface</span>
+        <div class="seg-grp" data-pref="font">
+          <button class="seg-btn" type="button" data-val="apple" title="SF Pro on Apple devices, bundled Inter elsewhere">SF Pro</button>
+          <button class="seg-btn" type="button" data-val="google" title="Google Sans, loaded from Google Fonts">Google Sans</button>
+          <button class="seg-btn" type="button" data-val="inter" title="Bundled with the panel, works offline">Inter</button>
+        </div>
+        <small class="pref-note">SF Pro uses your Apple device's own font. Google Sans loads from Google Fonts. Inter ships inside the panel.</small>
+      </div>
+      <div class="pref-row"><span>Corners</span>
+        <div class="seg-grp" data-pref="corners">
+          <button class="seg-btn" type="button" data-val="round">Round</button>
+          <button class="seg-btn" type="button" data-val="soft">Soft</button>
+          <button class="seg-btn" type="button" data-val="square">Square</button>
+        </div>
+      </div>
+      <div class="pref-row"><span>Density</span>
+        <div class="seg-grp" data-pref="density">
+          <button class="seg-btn" type="button" data-val="comfortable">Comfortable</button>
+          <button class="seg-btn" type="button" data-val="compact">Compact</button>
+        </div>
+      </div>
+      <div class="pref-row"><span>Text size</span>
+        <div class="seg-grp" data-pref="text">
+          <button class="seg-btn" type="button" data-val="default">Default</button>
+          <button class="seg-btn" type="button" data-val="large">Large</button>
+        </div>
+      </div>
+      <div class="pref-row"><span>Motion</span>
+        <div class="seg-grp" data-pref="motion">
+          <button class="seg-btn" type="button" data-val="full">Full</button>
+          <button class="seg-btn" type="button" data-val="reduced">Reduced</button>
+        </div>
+      </div>
+      <div class="pref-checks">
+        <label class="chk"><input type="checkbox" data-pref-check="ticker"> <span>Show the feature ticker under the title</span></label>
+        <label class="chk"><input type="checkbox" data-pref-check="blurOnLoad"> <span>Blur my IP address every time the panel opens</span></label>
+        <label class="chk"><input type="checkbox" data-pref-check="confirmLogout"> <span>Ask before signing out</span></label>
+      </div>
+    </div>
+    <div class="pref-foot">
+      <button class="btn ghost sm-btn" id="dp-reset" type="button"><svg class="ic ic-sm"><use href="#i-refresh"/></svg>Reset to defaults</button>
+      <button class="btn primary sm-btn" id="dp-close" type="button"><svg class="ic ic-sm"><use href="#i-check"/></svg>Done</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>window.ORYVEX={{CONFIG}};</script>
+<script>{{QR}}</script>
+<script>{{APP}}</script>
+</body>
+</html>

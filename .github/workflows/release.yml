@@ -1,0 +1,170 @@
+name: Release
+
+# Fully automatic releases.
+#   push to main  -> build + test. If the code changed and v<package.json version> is already
+#                    released, the patch version is bumped, committed, tagged and released.
+#                    Docs-only pushes (site/, *.md) never release.
+#   push tag v*   -> releases exactly that tag (must match package.json).
+#   Run workflow  -> pick patch / minor / major or type an exact version.
+# Repository variable AUTO_BUMP = patch (default) | minor | none  controls the push-to-main behaviour.
+# If main is branch-protected, add a fine-grained PAT (contents: write) as secret RELEASE_TOKEN.
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Version bump
+        type: choice
+        options: [patch, minor, major, none]
+        default: patch
+      version:
+        description: Exact version, e.g. 1.4.0 (overrides bump)
+        required: false
+        default: ''
+      prerelease:
+        description: Mark as pre-release
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.RELEASE_TOKEN || github.token }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Configure git
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Decide what to release
+        id: plan
+        env:
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+          IN_BUMP: ${{ inputs.bump }}
+          IN_VERSION: ${{ inputs.version }}
+          AUTO_BUMP: ${{ vars.AUTO_BUMP || 'patch' }}
+        run: |
+          set -euo pipefail
+          CUR=$(node -p "require('./package.json').version")
+          tag_exists() { git rev-parse -q --verify "refs/tags/$1" >/dev/null || git ls-remote --exit-code --tags origin "refs/tags/$1" >/dev/null 2>&1; }
+          BUMP=""
+          RELEASE=false
+          case "$EVENT" in
+            workflow_dispatch)
+              if [ -n "$IN_VERSION" ]; then BUMP="$IN_VERSION"; elif [ "$IN_BUMP" != "none" ]; then BUMP="$IN_BUMP"; fi
+              RELEASE=true ;;
+            push)
+              if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+                [ "${GITHUB_REF_NAME}" = "v$CUR" ] || { echo "::error::Tag ${GITHUB_REF_NAME} does not match package.json v$CUR"; exit 1; }
+                RELEASE=true
+              else
+                if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+                  CHANGED=$(git ls-files)
+                else
+                  CHANGED=$(git diff --name-only "$BEFORE" "$GITHUB_SHA" || git ls-files)
+                fi
+                CODE=$(printf '%s\n' "$CHANGED" | grep -Ev '^(site/|docs/|\.github/workflows/pages\.yml$)|\.md$|^LICENSE$' || true)
+                if [ -z "$CODE" ]; then
+                  echo "Docs-only push: no release."
+                elif ! tag_exists "v$CUR"; then
+                  RELEASE=true                     # version was bumped by hand: release it as-is
+                elif [ "$AUTO_BUMP" != "none" ]; then
+                  BUMP="$AUTO_BUMP"; RELEASE=true  # already released: bump automatically
+                fi
+              fi ;;
+          esac
+          echo "bump=$BUMP"       >> "$GITHUB_OUTPUT"
+          echo "release=$RELEASE" >> "$GITHUB_OUTPUT"
+          echo "plan: release=$RELEASE bump=${BUMP:-none} current=v$CUR"
+
+      - name: Bump version and commit
+        if: steps.plan.outputs.bump != ''
+        run: |
+          set -euo pipefail
+          NEW=$(node scripts/bump-version.mjs "${{ steps.plan.outputs.bump }}")
+          git add package.json package-lock.json src/storage.js CHANGELOG.md
+          git commit -m "chore(release): v$NEW [skip ci]"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Resolve tag
+        id: v
+        run: |
+          set -euo pipefail
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION"            >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION"               >> "$GITHUB_OUTPUT"
+          echo "sha=$(git rev-parse HEAD)"   >> "$GITHUB_OUTPUT"
+          if gh release view "v$VERSION" >/dev/null 2>&1; then echo "exists=true" >> "$GITHUB_OUTPUT"; else echo "exists=false" >> "$GITHUB_OUTPUT"; fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Install font subsetter
+        run: pip install --quiet fonttools brotli
+      - run: npm ci
+      - name: Unit tests
+        run: npm run test:unit
+      - name: Build
+        run: npm run build
+        env:
+          ORYVEX_UPDATE_REPO: ${{ github.repository }}
+      - name: Verify bundle
+        run: node scripts/verify-build.mjs
+      - name: Checksums
+        run: sha256sum worker-single-file.js oryvex-worker-panel-pages.zip | tee SHA256SUMS.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: oryvex-worker-panel-${{ steps.v.outputs.tag }}-${{ steps.v.outputs.sha }}
+          path: |
+            worker-single-file.js
+            oryvex-worker-panel-pages.zip
+            panel-preview.html
+            SHA256SUMS.txt
+          if-no-files-found: error
+
+      - name: Tag and publish release
+        if: steps.plan.outputs.release == 'true' && steps.v.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN || github.token }}
+          TAG: ${{ steps.v.outputs.tag }}
+          SHA: ${{ steps.v.outputs.sha }}
+          PRE: ${{ inputs.prerelease && '--prerelease' || '--latest' }}
+        run: |
+          set -euo pipefail
+          node scripts/release-notes.mjs "${TAG#v}" > RELEASE_NOTES.md
+          if ! git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
+            git tag -a "$TAG" -m "OryvexWorkerPanel $TAG" "$SHA"
+            git push origin "$TAG"
+          fi
+          gh release create "$TAG" worker-single-file.js oryvex-worker-panel-pages.zip SHA256SUMS.txt \
+            --verify-tag --title "OryvexWorkerPanel $TAG" --notes-file RELEASE_NOTES.md $PRE
+          echo "### Released $TAG" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Refresh docs site
+        if: steps.plan.outputs.release == 'true' && steps.v.outputs.exists == 'false'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref "${{ github.event.repository.default_branch }}"

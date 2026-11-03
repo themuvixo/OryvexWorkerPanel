@@ -1,0 +1,40 @@
+<!--{"title":"Troubleshooting","nav":"Troubleshooting","order":6,"layout":"doc","lead":"Every error page the Worker can show, and how to fix it.","description":"Fix OryvexWorkerPanel errors: missing KV, storage limits, missing UI bundle, invalid subscription links and update problems."}-->
+<section class="card err-card" id="kv-missing">
+  <h2 class="kicker"><svg class="ic"><use href="#i-alert"/></svg>Storage isn't connected<code class="tag">E_KV_MISSING · 503</code></h2>
+  <p>No KV namespace is bound as <code>KV</code>. Bind one in <b>Settings → Bindings</b>. If you bound it under another name, the page tells you which.</p>
+  <a class="btn sm-btn" href="errors/kv-missing.html">Preview page<svg class="ic ic-sm"><use href="#i-arrow"/></svg></a>
+</section>
+<section class="card err-card" id="kv-unavailable">
+  <h2 class="kicker"><svg class="ic"><use href="#i-alert"/></svg>Storage temporarily unavailable<code class="tag">E_KV_UNAVAILABLE · 503</code></h2>
+  <p>KV reads or writes failed, usually the Free-plan daily write limit. It resets at 00:00 UTC.</p>
+  <a class="btn sm-btn" href="errors/kv-unavailable.html">Preview page<svg class="ic ic-sm"><use href="#i-arrow"/></svg></a>
+</section>
+<section class="card err-card" id="ui-bundle">
+  <h2 class="kicker"><svg class="ic"><use href="#i-alert"/></svg>UI missing from build<code class="tag">E_UI_BUNDLE_MISSING · 500</code></h2>
+  <p>You deployed <code>src/worker.js</code> directly. Deploy the built <code>worker-single-file.js</code> instead.</p>
+  <a class="btn sm-btn" href="errors/ui-bundle-missing.html">Preview page<svg class="ic ic-sm"><use href="#i-arrow"/></svg></a>
+</section>
+<section class="card err-card" id="sub-not-found">
+  <h2 class="kicker"><svg class="ic"><use href="#i-alert"/></svg>Subscription link not valid<code class="tag">E_SUB_NOT_FOUND · 404</code></h2>
+  <p>The token was mistyped, rotated, or the subscriber was removed. Copy a fresh link from the panel.</p>
+  <a class="btn sm-btn" href="errors/sub-not-found.html">Preview page<svg class="ic ic-sm"><use href="#i-arrow"/></svg></a>
+</section>
+<section class="card err-card" id="internal">
+  <h2 class="kicker"><svg class="ic"><use href="#i-alert"/></svg>Unexpected error<code class="tag">E_INTERNAL · 500</code></h2>
+  <p>Reload. If it repeats, look up the reference ID in <b>Workers → Logs</b>.</p>
+  <a class="btn sm-btn" href="errors/internal.html">Preview page<svg class="ic ic-sm"><use href="#i-arrow"/></svg></a>
+</section>
+<section class="card" id="updater">
+  <h2 class="kicker"><svg class="ic"><use href="#i-cloud-up"/></svg>Updater messages</h2>
+  <ul class="spec-list">
+    <li><b>Not configured</b><span>The build doesn't know its repository. Build in GitHub Actions or set <code>ORYVEX_UPDATE_REPO</code>.</span></li>
+    <li><b>No release yet</b><span>Nothing is published. Push to <code>main</code> or run the Release workflow.</span></li>
+    <li><b>Could not reach GitHub</b><span>Both GitHub routes failed. Wait a minute, or bind a <code>GITHUB_TOKEN</code> secret.</span></li>
+    <li><b>Not attached to release</b><span>The release has no <code>worker-single-file.js</code>. Re-run the Release workflow.</span></li>
+    <li><b>Worker not found</b><span>The Worker name is wrong, or the token lacks <i>Workers Scripts: Edit</i>.</span></li>
+  </ul>
+</section>
+<section class="card" id="ping">
+  <h2 class="kicker"><svg class="ic"><use href="#i-gauge"/></svg>Clients show -1 ping</h2>
+  <p>Check the app uses TLS port 443 (or another TLS port) with ALPN <code>http/1.1</code> for WebSocket nodes, and that the kill switch is off. Try the XHTTP node on networks that break WebSockets.</p>
+</section>

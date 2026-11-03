@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "username": "themuvixo",
+  "owner": "themuvixo",
+  "repo": "OryvexWorkerPanel",
+  "repository": "themuvixo/OryvexWorkerPanel",
+  "repositoryUrl": "https://github.com/themuvixo/OryvexWorkerPanel",
+  "pagesUrl": "https://themuvixo.github.io/OryvexWorkerPanel/",
+  "api": {
+    "owner": "https://api.github.com/users/themuvixo",
+    "repository": "https://api.github.com/repos/themuvixo/OryvexWorkerPanel",
+    "releases": "https://api.github.com/repos/themuvixo/OryvexWorkerPanel/releases",
+    "latestRelease": "https://api.github.com/repos/themuvixo/OryvexWorkerPanel/releases/latest",
+    "tags": "https://api.github.com/repos/themuvixo/OryvexWorkerPanel/tags"
+  }
+}

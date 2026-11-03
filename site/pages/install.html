@@ -1,0 +1,50 @@
+<!--{"title":"Install","nav":"Install","order":2,"layout":"doc","lead":"Grab a build, bind KV, open your Worker.","description":"Install OryvexWorkerPanel on Cloudflare Workers, Cloudflare Pages or with Wrangler."}-->
+<section class="card" id="build">
+  <h2 class="kicker"><svg class="ic"><use href="#i-download"/></svg>Get a build</h2>
+  <p>Every release on GitHub ships three files:</p>
+  <ul class="spec-list">
+    <li><code>worker-single-file.js</code><span>Cloudflare Workers, paste into the editor.</span></li>
+    <li><code>oryvex-worker-panel-pages.zip</code><span>Cloudflare Pages, upload as assets.</span></li>
+    <li><code>SHA256SUMS.txt</code><span>Checksums for both.</span></li>
+  </ul>
+  <p><a class="btn primary sm-btn" href="{{RELEASES_URL}}"><svg class="ic ic-sm"><use href="#i-download"/></svg>Download v{{VERSION}}</a></p>
+  <p class="note">Forked the repo? Push to <code>main</code> and the Release workflow builds, tags and publishes your own release. See <a href="updates.html">Updates &amp; releases</a>.</p>
+</section>
+
+<section class="card" id="workers">
+  <h2 class="kicker"><svg class="ic"><use href="#i-server"/></svg>Cloudflare Workers <span class="badge ok">Recommended</span></h2>
+  <ol class="steps">
+    <li><b>Create a KV namespace</b><span><b>Storage &amp; Databases → KV → Create</b>, e.g. <code>oryvex-kv</code>.</span></li>
+    <li><b>Create the Worker</b><span><b>Workers &amp; Pages → Create → Start with Hello World → Deploy → Edit code</b>. Replace everything with <code>worker-single-file.js</code> and deploy.</span></li>
+    <li><b>Bind KV</b><span><b>Settings → Bindings → Add → KV namespace</b>, variable name exactly <code>KV</code>.</span></li>
+    <li><b>Open the Worker URL</b><span>Set your admin password. Done.</span></li>
+  </ol>
+  <p class="note">Skipped step 3? The Worker shows an <a href="troubleshooting.html#kv-missing">E_KV_MISSING</a> page with these steps, and tells you if KV was bound under a different name.</p>
+</section>
+
+<section class="card" id="pages">
+  <h2 class="kicker"><svg class="ic"><use href="#i-globe"/></svg>Cloudflare Pages</h2>
+  <ol class="steps">
+    <li><b>Upload</b><span><b>Workers &amp; Pages → Create → Pages → Upload assets</b>, then upload <code>oryvex-worker-panel-pages.zip</code>.</span></li>
+    <li><b>Configure</b><span>In <b>Settings → Functions</b> set compatibility date <code>2024-09-23</code> or later and bind KV as <code>KV</code>.</span></li>
+    <li><b>Redeploy</b><span>Upload the same zip again so the binding applies.</span></li>
+  </ol>
+</section>
+
+<section class="card" id="wrangler">
+  <h2 class="kicker"><svg class="ic"><use href="#i-sliders"/></svg>Wrangler (CLI)</h2>
+<pre><code>npm ci
+npx wrangler kv namespace create KV   # put the id in wrangler.toml
+npm run deploy</code></pre>
+  <p class="note">Set <code>ORYVEX_UPDATE_REPO=owner/repo</code> before building locally so the in-panel updater knows where to look.</p>
+</section>
+
+<section class="card" id="local">
+  <h2 class="kicker"><svg class="ic"><use href="#i-monitor"/></svg>Build locally</h2>
+<pre><code>npm ci
+pip install fonttools brotli   # optional, smaller fonts
+npm run build                  # worker-single-file.js + pages zip
+npm test                       # unit tests
+npm run build:site             # this docs site into _site/</code></pre>
+  <p><code>panel-preview.html</code> opens the whole panel offline with demo data.</p>
+</section>

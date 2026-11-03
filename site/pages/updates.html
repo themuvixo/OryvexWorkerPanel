@@ -1,0 +1,42 @@
+<!--{"title":"Updates & releases","nav":"Updates","order":5,"layout":"doc","lead":"Push to main. CI tags it, releases it, and every panel can install it.","description":"How OryvexWorkerPanel versions, tags and releases itself with GitHub Actions, and how the in-panel updater installs releases."}-->
+<section class="card" id="flow">
+  <h2 class="kicker"><svg class="ic"><use href="#i-tag"/></svg>How a release happens</h2>
+  <ol class="steps">
+    <li><b>You push to <code>main</code></b><span>The <b>Release</b> workflow builds and tests every push.</span></li>
+    <li><b>It picks a version</b><span>If <code>package.json</code> holds a version that isn't tagged yet, that version ships. Otherwise the patch number is bumped and committed for you.</span></li>
+    <li><b>It tags and publishes</b><span>Tag <code>vX.Y.Z</code>, a GitHub Release with notes from <code>CHANGELOG.md</code>, plus <code>worker-single-file.js</code>, the Pages zip and <code>SHA256SUMS.txt</code>.</span></li>
+    <li><b>Panels see it</b><span>Every panel built from the repo lights a <b>NEW</b> badge on <b>Update</b> within six hours.</span></li>
+  </ol>
+  <p class="note">Docs-only pushes (<code>site/</code>, <code>*.md</code>) never cut a release.</p>
+</section>
+
+<section class="card" id="control">
+  <h2 class="kicker"><svg class="ic"><use href="#i-sliders"/></svg>Control the version</h2>
+  <ul class="spec-list">
+    <li><b>Minor or major</b><span><b>Actions → Release → Run workflow</b>, pick <code>minor</code> / <code>major</code>, or type an exact version.</span></li>
+    <li><b>By hand</b><span><code>npm run release:minor</code>, edit <code>CHANGELOG.md</code>, push. That exact version ships.</span></li>
+    <li><b>Manual tag</b><span>Push <code>vX.Y.Z</code> matching <code>package.json</code> and it's released as-is.</span></li>
+    <li><b>Turn off auto-bump</b><span>Repository variable <code>AUTO_BUMP</code> = <code>none</code> (or <code>minor</code>).</span></li>
+    <li><b>Protected main</b><span>Add a fine-grained token with <i>Contents: write</i> as secret <code>RELEASE_TOKEN</code>.</span></li>
+  </ul>
+</section>
+
+<section class="card" id="panel">
+  <h2 class="kicker"><svg class="ic"><use href="#i-cloud-up"/></svg>Update from the panel</h2>
+  <ol class="steps">
+    <li><b>Save a Cloudflare token</b><span>Top bar → <b>CF daily</b> → token with <i>Workers Scripts: Edit</i>.</span></li>
+    <li><b>Open Update</b><span>It shows installed → latest, release date and notes.</span></li>
+    <li><b>Install update</b><span>The bundle is downloaded from the release, its version checked, and deployed with your KV bindings, variables and secrets kept.</span></li>
+  </ol>
+</section>
+
+<section class="card" id="check">
+  <h2 class="kicker"><svg class="ic"><use href="#i-refresh"/></svg>How the check works</h2>
+  <ul class="spec-list">
+    <li><b>Releases only</b><span>Only published Releases count, so "update available" always has a file behind it.</span></li>
+    <li><b>Rate-limit proof</b><span>Uses the GitHub API first; if it's throttled, falls back to the <code>releases/latest</code> redirect on github.com.</span></li>
+    <li><b>Cached</b><span>Results are kept 10 minutes on the Worker. <b>Check now</b> always asks GitHub again.</span></li>
+    <li><b>Verified</b><span>The downloaded bundle must carry the release's version on line 1, or nothing is deployed.</span></li>
+  </ul>
+  <p class="note">Bind an optional <code>GITHUB_TOKEN</code> secret (no scopes needed for public repos) to lift the API limit from 60 to 5,000 checks an hour.</p>
+</section>

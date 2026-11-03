@@ -1,0 +1,43 @@
+<!--{"title":"Clients & subscriptions","nav":"Clients","order":4,"layout":"doc","lead":"One subscription link. Every app gets the format it understands.","description":"Subscription formats and supported clients for OryvexWorkerPanel: v2rayNG, v2rayN, Hiddify, sing-box, Clash Meta / Mihomo and more."}-->
+<section class="card" id="link">
+  <h2 class="kicker"><svg class="ic"><use href="#i-globe"/></svg>The subscription link</h2>
+  <p>Every subscriber has one link: <code>https://&lt;host&gt;/sub/&lt;token&gt;</code>. The Worker reads the app's user-agent and answers in the right format. Opened in a browser, it shows the subscriber's own status page with QR codes and one-tap import buttons.</p>
+</section>
+
+<section class="card" id="formats">
+  <h2 class="kicker"><svg class="ic"><use href="#i-sliders"/></svg>Force a format</h2>
+  <p>Add <code>?format=</code> when an app guesses wrong.</p>
+  <div class="table-wrap"><table class="specs">
+    <thead><tr><th>Value</th><th>Returns</th><th>Use with</th></tr></thead>
+    <tbody>
+      <tr><td><code>b64</code></td><td>Base64 URI list (default)</td><td>v2rayNG, v2rayN, Streisand, Shadowrocket, NekoBox</td></tr>
+      <tr><td><code>raw</code></td><td>Plain URI list</td><td>Debugging, copy-paste</td></tr>
+      <tr><td><code>xray</code></td><td>Xray JSON with TLS fragment</td><td>v2rayNG / v2rayN fragment profiles</td></tr>
+      <tr><td><code>singbox</code></td><td>sing-box JSON</td><td>sing-box, Hiddify</td></tr>
+      <tr><td><code>clash</code></td><td>Clash Meta YAML</td><td>Clash Verge, Mihomo, FlClash, Stash</td></tr>
+      <tr><td><code>json</code></td><td>Machine-readable node list</td><td>Scripts</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="card" id="apps">
+  <h2 class="kicker"><svg class="ic"><use href="#i-monitor"/></svg>Tested apps</h2>
+  <div class="app-grid">
+    <div class="app"><b>v2rayNG</b><span>Android</span></div>
+    <div class="app"><b>v2rayN</b><span>Windows · Linux · macOS</span></div>
+    <div class="app"><b>Hiddify</b><span>All platforms</span></div>
+    <div class="app"><b>sing-box</b><span>All platforms</span></div>
+    <div class="app"><b>Clash Verge / Mihomo</b><span>Desktop</span></div>
+    <div class="app"><b>Streisand · Shadowrocket</b><span>iOS</span></div>
+  </div>
+</section>
+
+<section class="card" id="telegram">
+  <h2 class="kicker"><svg class="ic"><use href="#i-telegram"/></svg>Telegram Web Proxy</h2>
+  <p>Turn it on in the panel and share the <code>tg://webproxy</code> link. Telegram Desktop and Android open it in one tap. Rotate the secret from the panel any time.</p>
+</section>
+
+<section class="card" id="doh">
+  <h2 class="kicker"><svg class="ic"><use href="#i-lock"/></svg>Private DoH</h2>
+  <p>Each subscriber gets <code>https://&lt;host&gt;/dns-query/&lt;token&gt;</code>. Paste it into any DNS-over-HTTPS setting (browsers, Android Private DNS apps, sing-box).</p>
+</section>

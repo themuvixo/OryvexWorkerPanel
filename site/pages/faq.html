@@ -1,0 +1,25 @@
+<!--{"title":"FAQ","nav":"FAQ","order":7,"layout":"doc","lead":"Short answers to the questions that come up most.","description":"Frequently asked questions about OryvexWorkerPanel."}-->
+<section class="card" id="cost">
+  <h2 class="kicker"><svg class="ic"><use href="#i-help"/></svg>Does it cost anything?</h2>
+  <p>No. It runs on Cloudflare's free Workers plan. The free plan allows 100,000 requests a day; the panel's <b>CF daily</b> meter shows how much you've used.</p>
+</section>
+<section class="card" id="sell">
+  <h2 class="kicker"><svg class="ic"><use href="#i-help"/></svg>Can I sell access?</h2>
+  <p>No. The software, deployments and the links it generates are for personal, educational and non-commercial use only. See the <a href="{{REPO_URL}}/blob/main/LICENSE">LICENSE</a>.</p>
+</section>
+<section class="card" id="users">
+  <h2 class="kicker"><svg class="ic"><use href="#i-help"/></svg>How many subscribers?</h2>
+  <p>Up to 200 per Worker, each with their own limits, expiry and keys.</p>
+</section>
+<section class="card" id="lose-data">
+  <h2 class="kicker"><svg class="ic"><use href="#i-help"/></svg>Will updating erase my users?</h2>
+  <p>No. Users live in KV, not in the code. The updater keeps every binding, variable and secret. Export a backup first if you want extra peace of mind.</p>
+</section>
+<section class="card" id="password">
+  <h2 class="kicker"><svg class="ic"><use href="#i-help"/></svg>I forgot the admin password</h2>
+  <p>There's no reset link, by design. Deleting the <code>nl:state:v2</code> key in your KV namespace re-runs setup, but it also clears subscribers and settings, so restore a backup afterwards. Keep a backup handy.</p>
+</section>
+<section class="card" id="fork">
+  <h2 class="kicker"><svg class="ic"><use href="#i-help"/></svg>Can I run my own fork?</h2>
+  <p>Yes. Fork, enable Actions and Pages (source: <b>GitHub Actions</b>), push to <code>main</code>. Your fork gets its own releases, docs site and an updater that points at it.</p>
+</section>

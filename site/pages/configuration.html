@@ -1,0 +1,43 @@
+<!--{"title":"Configuration","nav":"Configuration","order":3,"layout":"doc","lead":"Bindings, variables and the options inside the panel.","description":"Configure OryvexWorkerPanel: KV binding, variables, XHTTP, display options and the updater."}-->
+<section class="card" id="bindings">
+  <h2 class="kicker"><svg class="ic"><use href="#i-key"/></svg>Bindings &amp; variables</h2>
+  <div class="table-wrap"><table class="specs">
+    <thead><tr><th>Name</th><th>Type</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td><code>KV</code></td><td>KV binding</td><td><b>Required.</b> Stores admins, subscribers and settings.</td></tr>
+      <tr><td><code>UUID</code></td><td>Variable</td><td>Optional single-user stateless mode, no KV.</td></tr>
+      <tr><td><code>PROXYIP</code></td><td>Variable</td><td>Optional fallback proxy IPs.</td></tr>
+      <tr><td><code>GITHUB_TOKEN</code></td><td>Secret</td><td>Optional. Read-only GitHub token so update checks never hit the shared rate limit.</td></tr>
+      <tr><td><code>ORYVEX_UPDATE_REPO</code></td><td>Build env</td><td>Repository for the updater and links. Set automatically in GitHub Actions.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Compatibility date: <code>2024-09-23</code> or later.</p>
+</section>
+
+<section class="card" id="xhttp">
+  <h2 class="kicker"><svg class="ic"><use href="#i-bolt"/></svg>XHTTP transport</h2>
+  <p><b>Network → XHTTP transport</b> adds a VLESS node over XHTTP (<code>stream-one</code>, HTTP/2, ALPN <code>h2</code>) next to every TLS VLESS node. Clients POST to <code>https://&lt;host&gt;/xh</code> (path configurable).</p>
+  <ul class="compat"><li>Xray-core clients: v2rayNG, v2rayN, Streisand, Hiddify on Xray</li><li class="no">sing-box and Clash / Mihomo profiles skip it</li></ul>
+</section>
+
+<section class="card" id="display">
+  <h2 class="kicker"><svg class="ic"><use href="#i-palette"/></svg>Display options</h2>
+  <p>Open <b>Display</b> in the panel's top bar. Saved in your browser only.</p>
+  <ul class="spec-list">
+    <li><b>Theme</b><span>Dark, light or match system.</span></li>
+    <li><b>Accent</b><span>Signal lime, blue, violet, emerald, amber or rose.</span></li>
+    <li><b>Typeface</b><span>SF Pro (system), Google Sans (online) or bundled Inter.</span></li>
+    <li><b>Corners · density · text</b><span>Round / soft / square, compact density, large text.</span></li>
+    <li><b>Motion</b><span>Full or reduced.</span></li>
+    <li><b>Behaviour</b><span>Hide the ticker, blur your IP on load, confirm before sign-out.</span></li>
+  </ul>
+</section>
+
+<section class="card" id="security">
+  <h2 class="kicker"><svg class="ic"><use href="#i-lock"/></svg>Security &amp; backup</h2>
+  <ul class="spec-list">
+    <li><b>Password</b><span>PBKDF2-hashed in KV; login is rate-limited.</span></li>
+    <li><b>Kill switch</b><span>Stops every tunnel at once without touching users.</span></li>
+    <li><b>Backup / restore</b><span>Export settings and subscribers as JSON; import on any Worker.</span></li>
+  </ul>
+</section>

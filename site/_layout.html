@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>{{PAGE_TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<meta name="theme-color" content="#0a0a0c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+<meta property="og:title" content="{{PAGE_TITLE}}">
+<meta property="og:description" content="{{DESCRIPTION}}">
+<meta property="og:type" content="website">
+{{CANONICAL}}
+<link rel="icon" href="{{ROOT}}assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="{{ROOT}}assets/css/style.css?v={{VERSION}}">
+<script>/* theme before first paint: no flash */(function(){try{var t=localStorage.getItem('oryvex.site.theme')||'system';var d=document.documentElement;d.setAttribute('data-theme-pref',t);d.setAttribute('data-theme',t==='system'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):t);if(localStorage.getItem('oryvex.site.motion')==='reduced')d.setAttribute('data-motion','reduced');}catch(e){}})();</script>
+</head>
+<body class="page-{{SLUG}}">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14.5 14.5 0 0 1 0 18 14.5 14.5 0 0 1 0-18z"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="1"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></symbol>
+<symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3L21 2"/><path d="M17 6l3 3M14 9l2 2"/></symbol>
+<symbol id="i-external" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+<symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+<symbol id="i-server" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="7" rx="1"/><rect x="2" y="14" width="20" height="7" rx="1"/><path d="M6 6.5h.01M6 17.5h.01"/></symbol>
+<symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 17a8 8 0 1 1 16 0"/><path d="M12 13l3.5-3.5"/><circle cx="12" cy="13" r="1.4"/></symbol>
+<symbol id="i-cloud-up" viewBox="0 0 24 24"><path d="M12 16V5"/><path d="M8 9l4-4 4 4"/><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></symbol>
+<symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.8-1.7 1.8-1.7H16a5 5 0 0 0 5-5c0-4-4-7.2-9-7.2z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7" r="1"/><circle cx="17.5" cy="11" r="1"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 7.8h.01"/></symbol>
+<symbol id="i-telegram" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="m9.78 18.65.28-4.23 7.71-6.93c.34-.31-.07-.46-.53-.18l-9.52 6.05-4.12-1.29c-.89-.28-.9-.89.2-1.33l16.08-6.2c.73-.32 1.44.18 1.17 1.4l-2.74 12.72c-.19.91-.75 1.13-1.51.71l-4.24-3.14-2.05 1.97c-.23.23-.43.43-.73.45Z"/></symbol>
+<symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/><path d="M12 12l6.3-6.3"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 19h18"/><path d="M4 15l4-5 4 3 5-7 3 3"/></symbol>
+<symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></symbol>
+<symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-arrow-l" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.5"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+</svg>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="wrap">
+<header class="topline">
+  <a class="brand" href="{{ROOT}}index.html" aria-label="OryvexWorkerPanel home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><b>ORYVEX</b></a>
+  <a class="tick" href="{{ROOT}}changelog.html" title="Changelog">v{{VERSION}}</a>
+  <nav class="top-nav" id="top-nav" aria-label="Main">{{NAV}}</nav>
+  <span class="bar"></span>
+  <button class="sw search-btn" type="button" data-search-open aria-label="Search the docs (press /)"><svg class="ic ic-sm"><use href="#i-search"/></svg><span class="search-lbl">Search</span><kbd>/</kbd></button>
+  <div class="theme-grp" role="radiogroup" aria-label="Theme">
+    <button class="sw t-pick" data-th="light" type="button" role="radio" aria-checked="false" title="Light"><svg class="ic ic-sm"><use href="#i-sun"/></svg><span class="sr-only">Light</span></button>
+    <button class="sw t-pick" data-th="system" type="button" role="radio" aria-checked="false" title="Match system"><svg class="ic ic-sm"><use href="#i-monitor"/></svg><span class="sr-only">System</span></button>
+    <button class="sw t-pick" data-th="dark" type="button" role="radio" aria-checked="false" title="Dark"><svg class="ic ic-sm"><use href="#i-moon"/></svg><span class="sr-only">Dark</span></button>
+  </div>
+  <a class="sw gh-btn" href="{{REPO_URL}}" rel="noopener"><svg class="ic ic-sm"><use href="#i-github"/></svg><span>GitHub</span></a>
+  <button class="sw menu-btn" type="button" aria-expanded="false" aria-controls="top-nav" aria-label="Menu"><svg class="ic ic-sm"><use href="#i-menu"/></svg></button>
+</header>
+
+<main id="main">
+{{BODY}}
+</main>
+
+<footer class="site-footer">
+  <div class="foot-brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><b>OryvexWorkerPanel</b><span class="tick">v{{VERSION}}</span></div>
+  <nav class="foot-links" aria-label="Footer">{{FOOT_NAV}}<a href="{{REPO_URL}}">GitHub</a><a href="{{RELEASES_URL}}">Releases</a><a href="{{REPO_URL}}/issues">Issues</a></nav>
+  <p class="foot-note">Free &amp; open-source, not for sale. Licensed for non-commercial use, see <a href="{{REPO_URL}}/blob/main/LICENSE">LICENSE</a>.</p>
+</footer>
+</div>
+
+<div class="modal-backdrop" id="search-modal" hidden>
+  <div class="modal-box search-box" role="dialog" aria-modal="true" aria-label="Search the docs">
+    <div class="search-field"><svg class="ic"><use href="#i-search"/></svg><input id="search-input" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false" aria-controls="search-results"><kbd>Esc</kbd></div>
+    <ul class="search-results" id="search-results" role="listbox"></ul>
+  </div>
+</div>
+<button class="to-top" type="button" aria-label="Back to top" hidden><svg class="ic"><use href="#i-up"/></svg></button>
+<script>window.ORYVEX_SITE={root:"{{ROOT}}",version:"{{VERSION}}"};</script>
+<script src="{{ROOT}}assets/js/site.js?v={{VERSION}}" defer></script>
+</body>
+</html>

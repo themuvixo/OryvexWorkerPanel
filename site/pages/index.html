@@ -1,0 +1,75 @@
+<!--{"title":"Home","nav":"Overview","order":1,"layout":"home","description":"OryvexWorkerPanel: a free Cloudflare Workers panel for VLESS, Trojan, XHTTP, a Telegram Web Proxy and private DoH. No server to rent."}-->
+<section class="hero">
+  <h1 class="mast-title">Oryvex<span>Worker Panel</span></h1>
+  <div class="subline">
+    <span>VLESS, Trojan and a Telegram proxy from one Cloudflare Worker. No server to rent.</span>
+    <span class="pill-accent">Free &amp; open · v{{VERSION}}</span>
+    <div class="actions">
+      <a class="btn primary" href="install.html"><svg class="ic ic-sm"><use href="#i-bolt"/></svg>Install in 3 minutes</a>
+      <a class="btn" href="{{RELEASES_URL}}"><svg class="ic ic-sm"><use href="#i-download"/></svg>Latest release</a>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div class="ticker-track">
+  <span>VLESS + Trojan over WS</span><span>XHTTP stream-one</span><span>Telegram Web Proxy</span><span>Private DoH</span><span>Multi-user KV</span><span>Clean IP scanner</span><span>Browser ISP advisor</span><span>One-click self-update</span><span>Free · not for sale</span>
+  <span>VLESS + Trojan over WS</span><span>XHTTP stream-one</span><span>Telegram Web Proxy</span><span>Private DoH</span><span>Multi-user KV</span><span>Clean IP scanner</span><span>Browser ISP advisor</span><span>One-click self-update</span><span>Free · not for sale</span>
+</div></div>
+
+<div class="free-ribbon"><svg class="ic"><use href="#i-shield"/></svg><span><strong>Free and open-source.</strong> OryvexWorkerPanel is not for sale, and neither are the links it creates.</span></div>
+
+<section class="conn-strip" aria-label="At a glance">
+  <div class="conn-cell"><span class="conn-lbl"><svg class="ic ic-sm"><use href="#i-server"/></svg>Runs on</span><span class="conn-val">Workers · Pages</span></div>
+  <div class="conn-cell"><span class="conn-lbl"><svg class="ic ic-sm"><use href="#i-users"/></svg>Subscribers</span><span class="conn-val">Up to 200</span></div>
+  <div class="conn-cell"><span class="conn-lbl"><svg class="ic ic-sm"><use href="#i-globe"/></svg>Clients</span><span class="conn-val">One link, every app</span></div>
+  <div class="conn-cell"><span class="conn-lbl"><svg class="ic ic-sm"><use href="#i-gauge"/></svg>Server cost</span><span class="conn-val mono">$0</span></div>
+</section>
+
+<div class="home-grid">
+  <section class="card span-2 feature-lead">
+    <h2 class="kicker"><svg class="ic"><use href="#i-users"/></svg>Subscribers that look after themselves</h2>
+    <p class="dek">Traffic limits, expiry, start-on-first-connect, pause, reset and key rotation, all stored in Cloudflare KV. Each subscriber gets one link that adapts to whatever app opens it.</p>
+    <div class="demo-user" aria-hidden="true">
+      <div class="du-row"><b>Phone · Android</b><span class="badge ok">Active</span></div>
+      <div class="meter"><i style="width:34%"></i></div>
+      <div class="du-row du-meta"><span class="mono">17.1 / 50 GB</span><span>26 days left</span></div>
+    </div>
+  </section>
+  <section class="card">
+    <h2 class="kicker"><svg class="ic"><use href="#i-telegram"/></svg>Telegram Web Proxy</h2>
+    <p class="dek">One-tap <code>tg://webproxy</code> links for Telegram Desktop and Android.</p>
+  </section>
+  <section class="card">
+    <h2 class="kicker"><svg class="ic"><use href="#i-bolt"/></svg>XHTTP transport</h2>
+    <p class="dek">VLESS over XHTTP stream-one for networks that break WebSockets.</p>
+  </section>
+  <section class="card">
+    <h2 class="kicker"><svg class="ic"><use href="#i-lock"/></svg>Private DoH</h2>
+    <p class="dek">A per-user DNS-over-HTTPS endpoint at <code>/dns-query/&lt;token&gt;</code>.</p>
+  </section>
+  <section class="card">
+    <h2 class="kicker"><svg class="ic"><use href="#i-radar"/></svg>Network advisor</h2>
+    <p class="dek">Browser ISP advisor, clean-IP scanner and live telemetry.</p>
+  </section>
+  <section class="card">
+    <h2 class="kicker"><svg class="ic"><use href="#i-cloud-up"/></svg>Updates itself</h2>
+    <p class="dek">Every release is tagged by CI. The panel spots it and installs it, keeping KV and users.</p>
+  </section>
+  <section class="card">
+    <h2 class="kicker"><svg class="ic"><use href="#i-palette"/></svg>Display options</h2>
+    <p class="dek">Dark, light or system, six accents, three typefaces, compact density, reduced motion.</p>
+  </section>
+  <section class="card">
+    <h2 class="kicker"><svg class="ic"><use href="#i-alert"/></svg>Error pages that help</h2>
+    <p class="dek">Missing KV or a broken link shows exactly what to fix. <a href="troubleshooting.html">See them</a>.</p>
+  </section>
+</div>
+
+<section class="card steps-card">
+  <h2 class="kicker"><svg class="ic"><use href="#i-server"/></svg>Three steps to a running panel<a class="badge" href="install.html">Full guide</a></h2>
+  <ol class="steps">
+    <li><b>Create a KV namespace</b><span>Storage &amp; Databases → KV → Create.</span></li>
+    <li><b>Paste the Worker</b><span>Replace the Hello World code with <code>worker-single-file.js</code>.</span></li>
+    <li><b>Bind KV as <code>KV</code></b><span>Settings → Bindings, then open the Worker URL.</span></li>
+  </ol>
+</section>

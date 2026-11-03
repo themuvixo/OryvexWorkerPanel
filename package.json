@@ -1,0 +1,38 @@
+{
+  "name": "oryvex-worker-panel",
+  "version": "1.2.0",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs && wrangler dev --local",
+    "deploy": "node build.mjs && wrangler deploy",
+    "test": "node --test \"tests/**/*.test.mjs\"",
+    "shots": "node build.mjs && node shot.mjs",
+    "build:lite": "node build.mjs --lite",
+    "build:site": "node scripts/build-site.mjs",
+    "test:unit": "node --test \"tests/**/*.test.mjs\"",
+    "test:e2e": "node test.mjs",
+    "verify": "node scripts/verify-build.mjs",
+    "release:patch": "node scripts/bump-version.mjs patch",
+    "release:minor": "node scripts/bump-version.mjs minor",
+    "release:major": "node scripts/bump-version.mjs major"
+  },
+  "description": "OryvexWorkerPanel: Cloudflare Workers panel with KV-backed subscribers, VLESS/Trojan over WebSocket and XHTTP, Telegram Web Proxy, private DoH and display options.",
+  "devDependencies": {
+    "@babel/generator": "^7.29.12",
+    "@babel/parser": "^7.29.12",
+    "@babel/traverse": "^7.29.12",
+    "@babel/types": "^7.29.11",
+    "acorn": "^8.19.0",
+    "esbuild": "^0.28.2",
+    "playwright": "^1.64.1",
+    "qrcode-generator": "^2.0.4",
+    "wrangler": "^4.86.0",
+    "ws": "^8.22.0"
+  },
+  "private": true,
+  "type": "module",
+  "oryvex": {
+    "updateRepo": "themuvixo/OryvexWorkerPanel",
+    "docsUrl": ""
+  }
+}
