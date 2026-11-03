@@ -1,11 +1,8 @@
 name: CI
 
-# Pull requests and feature branches. `main` is built (and released) by release.yml.
+# Reusable CI checks. auto.yml runs this on pushes and pull requests.
 on:
-  pull_request:
-  push:
-    branches-ignore: [main]
-    tags-ignore: ['v*']
+  workflow_call:
   workflow_dispatch:
 
 permissions:

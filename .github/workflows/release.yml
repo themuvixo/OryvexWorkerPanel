@@ -83,7 +83,12 @@ jobs:
                 if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
                   CHANGED=$(git ls-files)
                 else
-                  CHANGED=$(git diff --name-only "$BEFORE" "$GITHUB_SHA" || git ls-files)
+                  if git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+                  CHANGED=$(git diff --name-only "$BEFORE" "$GITHUB_SHA")
+                else
+                  echo "Previous commit $BEFORE is not available; checking the tracked repository files."
+                  CHANGED=$(git ls-files)
+                fi
                 fi
                 CODE=$(printf '%s\n' "$CHANGED" | grep -Ev '^(site/|docs/|\.github/workflows/pages\.yml$)|\.md$|^LICENSE$' || true)
                 if [ -z "$CODE" ]; then

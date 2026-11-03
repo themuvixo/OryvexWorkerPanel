@@ -18,7 +18,9 @@ Run a multi-user subscription panel from a single Cloudflare Worker. No server t
 ## Get a build
 Download `worker-single-file.js` (Workers) or `oryvex-worker-panel-pages.zip` (Pages) from the latest **Release**.
 
-### Releases are automatic
+### Checks and releases run automatically
+- `.github/workflows/auto.yml` runs the shared CI checks on every branch push and pull request.
+- `.github/workflows/release.yml` builds and publishes releases from `main`; `.github/workflows/pages.yml` deploys the docs site when its content changes or a release is published.
 - Push code to `main` → the **Release** workflow builds, tests, bumps the patch version, tags `vX.Y.Z` and publishes a Release with both files and `SHA256SUMS.txt`. Docs-only pushes don't release.
 - Bumped `package.json` yourself (`npm run release:minor`)? That exact version ships.
 - **Actions → Release → Run workflow** for minor / major / exact version / pre-release.
